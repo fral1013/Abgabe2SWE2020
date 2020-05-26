@@ -68,8 +68,7 @@ export class BasicAuthService {
             console.error(
                 'BasicAuthService.login(): Kommunikationsfehler mit d. Appserver',
             );
-        }
-        if (response === undefined) {
+            // eslint-disable-next-line @typescript-eslint/return-await
             return Promise.reject(
                 new Error('Kommunikationsfehler mit dem Appserver'),
             );
@@ -91,7 +90,9 @@ export class BasicAuthService {
             // Base64-String fuer 1 Tag speichern
             basicAuth,
             roles,
+            // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+            new Date().getTime() + 24 * 60 * 60 * 1000,
         );
-        return roles;
+        return json;
     }
 }

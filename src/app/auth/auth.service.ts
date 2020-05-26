@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-underscore-dangle */
 /*
  * Copyright (C) 2016 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
@@ -15,16 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import { BasicAuthService } from './basic-auth.service';
 import { CookieService } from './cookie.service';
 import { Injectable } from '@angular/core';
-import { JwtService } from './jwt.service';
 import { Subject } from 'rxjs';
 
-export const ROLLE_ADMIN = 'admin';
+export const ROLLE_ADMIN = 'ROLE_ADMIN';
 // Spring Security:
 // export const ROLLE_ADMIN = 'ROLE_ADMIN'
 
-/* eslint-disable no-underscore-dangle */
 @Injectable({ providedIn: 'root' })
 export class AuthService {
     // Subject statt Observable:
@@ -34,7 +35,7 @@ export class AuthService {
     private readonly _rollenSubject = new Subject<Array<string>>();
 
     constructor(
-        private readonly jwtService: JwtService,
+        private readonly basicAuthService: BasicAuthService,
         private readonly cookieService: CookieService,
     ) {
         console.log('AuthService.constructor()');
@@ -51,8 +52,8 @@ export class AuthService {
         );
         let rollen: Array<string> = [];
         try {
-            // this.basicAuthService.login(username, password)
-            rollen = await this.jwtService.login(username, password);
+            rollen = await this.basicAuthService.login(username, password);
+            // rollen = await this.jwtService.login(username, password);
             console.log('AuthService.login()', rollen);
             this.isLoggedInSubject.next(true);
         } catch (err) {
@@ -111,5 +112,3 @@ export class AuthService {
         return rolesArray !== undefined && rolesArray.includes(ROLLE_ADMIN);
     }
 }
-
-/* eslint-enable no-underscore-dangle */
