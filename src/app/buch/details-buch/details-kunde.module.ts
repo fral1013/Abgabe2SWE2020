@@ -18,7 +18,7 @@
 import { CommonModule } from '@angular/common';
 import { DetailsBearbeitenModule } from './details-bearbeiten.module';
 import { DetailsBreadcrumbsModule } from './details-breadcrumbs.module';
-import { DetailsBuchComponent } from './details-buch.component';
+import { DetailsKundeComponent } from './details-kunde.component';
 import { DetailsSchlagwoerterModule } from './schlagwoerter/details-schlagwoerter.module';
 import { DetailsStammdatenModule } from './stammdaten/details-stammdaten.module';
 import { ErrorMessageModule } from '../../shared/error-message.module';
@@ -28,8 +28,8 @@ import { Title } from '@angular/platform-browser';
 import { WaitingModule } from '../../shared/waiting.module';
 
 @NgModule({
-    declarations: [DetailsBuchComponent],
-    exports: [DetailsBuchComponent],
+    declarations: [DetailsKundeComponent],
+    exports: [DetailsKundeComponent],
     providers: [Title],
     imports: [
         CommonModule,
@@ -38,8 +38,8 @@ import { WaitingModule } from '../../shared/waiting.module';
         WaitingModule,
         DetailsBearbeitenModule,
         DetailsBreadcrumbsModule,
-        DetailsSchlagwoerterModule,
+        DetailsInteressenModule,
         DetailsStammdatenModule,
     ],
 })
-export class DetailsBuchModule {}
+export class DetailsKundeModule {}

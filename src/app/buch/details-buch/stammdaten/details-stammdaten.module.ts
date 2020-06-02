@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PartICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -16,16 +16,13 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { DetailsArtModule } from './details-art.module';
+import { DetailsGeschlechtModule } from './details-geschlecht.module';
 import { DetailsBewertungModule } from './details-bewertung.module';
-import { DetailsDatumModule } from './details-datum.module';
-import { DetailsIsbnModule } from './details-isbn.module';
-import { DetailsLieferbarModule } from './details-lieferbar.module';
-import { DetailsPreisModule } from './details-preis.module';
-import { DetailsRabattModule } from './details-rabatt.module';
+import { DetailsGeburtsdatumModule } from './details-geburtsdatum.module';
+import { DetailsNewsletterModule } from './details-newsletter.module';
 import { DetailsStammdatenComponent } from './details-stammdaten.component';
-import { DetailsTitelModule } from './details-titel.module';
-import { DetailsVerlagModule } from './details-verlag.module';
+import { DetailsNachnameModule } from './details-nachname.module';
+import { DetailsFamilienstandModule } from './details-familienstand.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -33,15 +30,12 @@ import { NgModule } from '@angular/core';
     exports: [DetailsStammdatenComponent],
     imports: [
         CommonModule,
-        DetailsArtModule,
+        DetailsGeschlechtModule,
         DetailsBewertungModule,
-        DetailsDatumModule,
-        DetailsIsbnModule,
-        DetailsLieferbarModule,
-        DetailsPreisModule,
-        DetailsRabattModule,
-        DetailsTitelModule,
-        DetailsVerlagModule,
+        DetailsGeburtsdatumModule,
+        DetailsNewsletterModule,
+        DetailsNachnameModule,
+        DetailsFamilienstandModule,
     ],
 })
 export class DetailsStammdatenModule {}

@@ -16,25 +16,25 @@
  */
 
 import { BalkendiagrammModule } from './diagramme/balkendiagramm.module';
-import { BuchRoutingModule } from './buch-routing.module';
-import { CreateBuchModule } from './create-buch/create-buch.module';
-import { DetailsBuchModule } from './details-buch/details-buch.module';
+import { KundeRoutingModule } from './kunde-routing.module';
+import { CreateKundeModule } from './create-kunde/create-kunde.module';
+import { DetailsKundeModule } from './details-kunde/details-kunde.module';
 import { LiniendiagrammModule } from './diagramme/liniendiagramm.module';
 import { NgModule } from '@angular/core';
-import { SucheBuecherModule } from './suche-buecher/suche-buecher.module';
+import { SucheKundenModule } from './suche-kunden/suche-kunden.module';
 import { TortendiagrammModule } from './diagramme/tortendiagramm.module';
-import { UpdateBuchModule } from './update-buch/update-buch.module';
+import { UpdateKundeModule } from './update-kunde/update-kunde.module';
 
 @NgModule({
     imports: [
         BalkendiagrammModule,
-        CreateBuchModule,
-        DetailsBuchModule,
+        CreateKundeModule,
+        DetailsKundeModule,
         LiniendiagrammModule,
-        SucheBuecherModule,
+        SucheKundenModule,
         TortendiagrammModule,
-        UpdateBuchModule,
-        BuchRoutingModule,
+        UpdateKundeModule,
+        KundeRoutingModule,
     ],
 })
-export class BuchModule {}
+export class KundeModule {}

@@ -16,21 +16,21 @@
  */
 
 import { Component, Input } from '@angular/core';
-import type { BuchArt } from '../../shared/buch';
+import type { Geschlecht } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-details-art</code>
+ * Komponente f&uuml;r das Tag <code>hs-details-geschlecht</code>
  */
 @Component({
-    selector: 'hs-details-art',
-    templateUrl: './details-art.component.html',
+    selector: 'hs-details-geschlecht',
+    templateUrl: './details-geschlecht.component.html',
 })
-export class DetailsArtComponent implements OnInit {
+export class DetailsGeschlechtComponent implements OnInit {
     @Input()
-    readonly art!: BuchArt;
+    readonly geschlecht!: Geschlecht;
 
     ngOnInit() {
-        console.log(`DetailsArtComponent.art=${this.art}`);
+        console.log(`DetailsGeschlechtComponent.geschlecht=${this.geschlecht}`);
     }
 }

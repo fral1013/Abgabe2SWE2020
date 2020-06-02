@@ -16,7 +16,7 @@
  */
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { Buch, BuchService } from '../shared';
+import { Kunde, KundeService } from '../shared';
 import type { OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Component } from '@angular/core';
@@ -26,16 +26,16 @@ import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-details-buch</code>
+ * Komponente f&uuml;r das Tag <code>hs-details-kunde</code>
  */
 @Component({
-    selector: 'hs-details-buch',
-    templateUrl: './details-buch.component.html',
+    selector: 'hs-details-kunde',
+    templateUrl: './details-kunde.component.html',
 })
-export class DetailsBuchComponent implements OnInit, OnDestroy {
+export class DetailsKundeComponent implements OnInit, OnDestroy {
     waiting = true;
 
-    buch: Buch | undefined;
+    kunde: Kunde | undefined;
 
     errorMsg: string | undefined;
 
@@ -45,12 +45,12 @@ export class DetailsBuchComponent implements OnInit, OnDestroy {
 
     // eslint-disable-next-line max-params
     constructor(
-        private readonly buchService: BuchService,
+        private readonly kundeService: KundeService,
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
         private readonly authService: AuthService,
     ) {
-        console.log('DetailsBuchComponent.constructor()');
+        console.log('DetailsKundeComponent.constructor()');
     }
 
     ngOnInit() {
@@ -67,13 +67,13 @@ export class DetailsBuchComponent implements OnInit, OnDestroy {
     }
 
     private subscribeIdParam() {
-        // Pfad-Parameter aus /buecher/:id
+        // Pfad-Parameter aus /kunden/:id
         // UUID (oder Mongo-ID) ist ein String
 
         // next-Function fuer Observable
         const next = (params: Params) => {
             console.log(
-                'DetailsBuchComponent.subscribeIdParam(): params=',
+                'DetailsKundeComponent.subscribeIdParam(): params=',
                 params,
             );
 
@@ -83,7 +83,7 @@ export class DetailsBuchComponent implements OnInit, OnDestroy {
             // https://github.com/typescript-eslint/typescript-eslint/pull/1799
             (async () => {
                 try {
-                    this.buch = await this.buchService.findById(params.id);
+                    this.kunde = await this.kundeService.findById(params.id);
                 } catch (err) {
                     this.handleError(err);
                     return;
@@ -93,9 +93,9 @@ export class DetailsBuchComponent implements OnInit, OnDestroy {
 
                 this.errorMsg = undefined;
                 const titel =
-                    this.buch === undefined
+                    this.kunde === undefined
                         ? 'Details'
-                        : `Details ${this.buch._id}`;
+                        : `Details ${this.kunde._id}`;
                 this.titleService.setTitle(titel);
             })();
         };
@@ -108,11 +108,11 @@ export class DetailsBuchComponent implements OnInit, OnDestroy {
         const { statuscode } = err;
         console.log(`DetailsComponent.handleError(): statuscode=${statuscode}`);
 
-        this.buch = undefined;
+        this.kunde = undefined;
 
         switch (statuscode) {
             case HttpStatus.NOT_FOUND:
-                this.errorMsg = 'Kein Buch gefunden.';
+                this.errorMsg = 'Kein Kunde gefunden.';
                 break;
             case HttpStatus.TOO_MANY_REQUESTS:
                 this.errorMsg =

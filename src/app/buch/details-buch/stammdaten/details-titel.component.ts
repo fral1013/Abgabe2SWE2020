@@ -19,17 +19,17 @@ import { Component, Input } from '@angular/core';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-details-titel</code>
+ * Komponente f&uuml;r das Tag <code>hs-details-nachname</code>
  */
 @Component({
-    selector: 'hs-details-titel',
-    templateUrl: './details-titel.component.html',
+    selector: 'hs-details-nachname',
+    templateUrl: './details-nachname.component.html',
 })
-export class DetailsTitelComponent implements OnInit {
+export class DetailsNachnameComponent implements OnInit {
     @Input()
-    readonly titel!: string;
+    readonly nachname!: string;
 
     ngOnInit() {
-        console.log(`DetailsTitelComponent.titel=${this.titel}`);
+        console.log(`DetailsNachnameComponent.nachname=${this.nachname}`);
     }
 }

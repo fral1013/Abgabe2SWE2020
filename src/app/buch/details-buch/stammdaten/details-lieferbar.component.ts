@@ -19,17 +19,17 @@ import { Component, Input } from '@angular/core';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-details-lieferbar</code>
+ * Komponente f&uuml;r das Tag <code>hs-details-newsletter</code>
  */
 @Component({
-    selector: 'hs-details-lieferbar',
-    templateUrl: './details-lieferbar.component.html',
+    selector: 'hs-details-newsletter',
+    templateUrl: './details-newsletter.component.html',
 })
-export class DetailsLieferbarComponent implements OnInit {
+export class DetailsNewsletterComponent implements OnInit {
     @Input()
-    readonly lieferbar: boolean | undefined;
+    readonly newsletter: boolean | undefined;
 
     ngOnInit() {
-        console.log(`DetailsLieferbarComponent.lieferbar=${this.lieferbar}`);
+        console.log(`DetailsNewsletterComponent.newsletter=${this.newsletter}`);
     }
 }

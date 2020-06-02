@@ -15,14 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<div *ngIf="buch">
-  <hs-details-titel [titel]="buch.titel"></hs-details-titel>
-  <hs-details-bewertung [ratingArray]="buch.ratingArray"></hs-details-bewertung>
-  <hs-details-art [art]="buch.art"></hs-details-art>
-  <hs-details-verlag [verlag]="buch.verlag"></hs-details-verlag>
-  <hs-details-datum [formatted]="buch.datumFormatted"></hs-details-datum>
-  <hs-details-preis [preis]="buch.preis"></hs-details-preis>
-  <hs-details-rabatt [rabatt]="buch.rabatt"></hs-details-rabatt>
-  <hs-details-lieferbar [lieferbar]="buch.lieferbar"></hs-details-lieferbar>
-  <hs-details-isbn [isbn]="buch.isbn"></hs-details-isbn>
+<div *ngIf="kunde">
+  <hs-details-nachname [nachname]="kunde.nachname"></hs-details-nachname>
+  <hs-details-bewertung [ratingArray]="kunde.ratingArray"></hs-details-bewertung>
+  <hs-details-geschlecht [geschlecht]="kunde.geschlecht"></hs-details-geschlecht>
+  <hs-details-familienstand [familienstand]="kunde.familienstand"></hs-details-familienstand>
+  <hs-details-geburtsdatum [formatted]="kunde.geburtsdatumFormatted"></hs-details-geburtsdatum>
+  <hs-details-newsletter [newsletter]="kunde.newsletter"></hs-details-newsletter>
 </div>
