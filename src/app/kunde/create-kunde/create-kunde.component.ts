@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Buch, BuchService, SaveError } from '../shared';
 import { HOME_PATH, HttpStatus } from '../../shared';
+import { Kunde, KundeService, SaveError } from '../shared';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
@@ -28,10 +28,10 @@ import { Title } from '@angular/platform-browser';
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-buch',
-    templateUrl: './create-buch.component.html',
+    selector: 'hs-create-kunde',
+    templateUrl: './create-kunde.component.html',
 })
-export class CreateBuchComponent implements OnInit {
+export class CreateKundeComponent implements OnInit {
     form = new FormGroup({});
 
     showWarning = false;
@@ -41,18 +41,18 @@ export class CreateBuchComponent implements OnInit {
     errorMsg: string | undefined = undefined;
 
     constructor(
-        private readonly buchService: BuchService,
+        private readonly kundeService: KundeService,
         private readonly router: Router,
         private readonly titleService: Title,
     ) {
-        console.log('CreateBuchComponent.constructor()');
+        console.log('CreateKundeComponent.constructor()');
         if (router !== undefined) {
             console.log('Injizierter Router:', router);
         }
     }
 
     ngOnInit() {
-        this.titleService.setTitle('Neues Buch');
+        this.titleService.setTitle('Neuer Kunde');
     }
 
     /**
@@ -72,18 +72,18 @@ export class CreateBuchComponent implements OnInit {
 
         if (this.form.invalid) {
             console.log(
-                'CreateBuchComponent.onSave(): Validierungsfehler',
+                'CreateKundeComponent.onSave(): Validierungsfehler',
                 this.form,
             );
             return false;
         }
 
-        const neuesBuch = Buch.fromForm(this.form.value);
-        console.log('CreateBuchComponent.onSave(): neuesBuch=', neuesBuch);
+        const neuerKunde = Kunde.fromForm(this.form.value);
+        console.log('CreateKundeComponent.onSave(): neuerKunde=', neuerKunde);
 
         try {
-            const id = await this.buchService.save(neuesBuch);
-            console.log(`CreateBuchComponent.onSave(): id=${id}`);
+            const id = await this.kundeService.save(neuerKunde);
+            console.log(`CreateKundeComponent.onSave(): id=${id}`);
         } catch (err) {
             this.handleError(err);
             return;
@@ -102,7 +102,7 @@ export class CreateBuchComponent implements OnInit {
     private handleError(err: SaveError) {
         const { statuscode } = err;
         console.log(
-            `CreateBuchComponent.handleError(): statuscode=${statuscode}`,
+            `CreateKundeComponent.handleError(): statuscode=${statuscode}`,
         );
 
         switch (statuscode) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,22 +20,22 @@ import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-datum&gt;, um das Erfassungsformular
+ * Komponente mit dem Tag &lt;hs-create-art&gt;, um das Erfassungsformular
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-datum',
-    templateUrl: './create-datum.component.html',
+    selector: 'hs-create-geschlecht',
+    templateUrl: './create-geschlecht.component.html',
 })
-export class CreateDatumComponent implements OnInit {
+export class CreateGeschlechtComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly datum = new FormControl(undefined);
+    readonly geschlecht = new FormControl('MAENNLICH');
 
     ngOnInit() {
-        console.log('CreateDatumComponent.ngOnInit');
+        console.log('CreateGeschlechtComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('datum', this.datum);
+        this.form.addControl('art', this.geschlecht);
     }
 }

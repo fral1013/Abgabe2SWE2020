@@ -15,13 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { CreateDatumComponent } from './create-datum.component';
+// eslint-disable-next-line import/named
+import { CreateGeburtsdatumComponent } from './create-geburtsdatum.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [CreateDatumComponent],
-    exports: [CreateDatumComponent],
+    declarations: [CreateGeburtsdatumComponent],
+    exports: [CreateGeburtsdatumComponent],
     imports: [ReactiveFormsModule],
 })
-export class CreateDatumModule {}
+export class CreateGeburtsdatumModule {}

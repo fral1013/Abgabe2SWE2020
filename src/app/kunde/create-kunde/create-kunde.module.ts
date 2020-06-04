@@ -16,10 +16,12 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { CreateArtModule } from './create-art.module';
-import { CreateBuchComponent } from './create-buch.component';
-import { CreateDatumModule } from './create-datum.module';
+// eslint-disable-next-line import/named
+import { CreateGeburtsdatumModule } from './create-geburtsdatum.module';
+// eslint-disable-next-line import/named
+import { CreateGeschlechtModule } from './create-geschlecht.module';
 import { CreateIsbnModule } from './create-isbn.module';
+import { CreateKundeComponent } from './create-kunde.component';
 import { CreateLieferbarModule } from './create-lieferbar.module';
 import { CreatePreisModule } from './create-preis.module';
 import { CreateRabattModule } from './create-rabatt.module';
@@ -38,14 +40,14 @@ import { Title } from '@angular/platform-browser';
 // Komponenten innerhalb deren Templates (= HTML-Fragmente) genutzt werden.
 // BuchModule ist ein "FeatureModule", das Features fuer Buecher bereitstellt
 @NgModule({
-    declarations: [CreateBuchComponent],
-    exports: [CreateBuchComponent],
+    declarations: [CreateKundeComponent],
+    exports: [CreateKundeComponent],
     imports: [
         CommonModule,
         HttpClientModule,
         ReactiveFormsModule,
-        CreateArtModule,
-        CreateDatumModule,
+        CreateGeschlechtModule,
+        CreateGeburtsdatumModule,
         CreateIsbnModule,
         CreateLieferbarModule,
         CreatePreisModule,
@@ -58,4 +60,4 @@ import { Title } from '@angular/platform-browser';
     ],
     providers: [Title],
 })
-export class CreateBuchModule {}
+export class CreateKundeModule {}

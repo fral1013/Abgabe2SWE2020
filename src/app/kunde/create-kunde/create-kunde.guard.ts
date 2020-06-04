@@ -21,7 +21,8 @@ import {
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
-import { CreateBuchComponent } from './create-buch.component';
+// eslint-disable-next-line import/named
+import { CreateKundeComponent } from './create-kunde.component';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -29,13 +30,13 @@ import { Observable } from 'rxjs';
 // https://angular.io/guide/router#can-deactivate-guard
 
 @Injectable({ providedIn: 'root' })
-export class CreateBuchGuard implements CanDeactivate<CreateBuchComponent> {
+export class CreateKundeGuard implements CanDeactivate<CreateKundeComponent> {
     constructor() {
-        console.log('CreateBuchGuard.constructor()');
+        console.log('CreateKundeGuard.constructor()');
     }
 
     canDeactivate(
-        createBuch: CreateBuchComponent,
+        createKunde: CreateKundeComponent,
         _: ActivatedRouteSnapshot, // eslint-disable-line @typescript-eslint/no-unused-vars
         __: RouterStateSnapshot, // eslint-disable-line @typescript-eslint/no-unused-vars
     ):
@@ -43,14 +44,14 @@ export class CreateBuchGuard implements CanDeactivate<CreateBuchComponent> {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        if (createBuch.fertig) {
+        if (createKunde.fertig) {
             // Seite darf zur gewuenschten URL verlassen werden
             return true;
         }
 
-        createBuch.showWarning = true;
-        createBuch.fertig = true;
-        console.warn('CreateBuchGuard.canDeactivate(): Verlassen der Seite');
+        createKunde.showWarning = true;
+        createKunde.fertig = true;
+        console.warn('CreateKundeGuard.canDeactivate(): Verlassen der Seite');
         return false;
     }
 }
