@@ -16,29 +16,26 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISBN_REGEX } from '../shared';
+import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
+
 /**
- * Komponente mit dem Tag &lt;hs-create-isbn&gt;, um das Erfassungsformular
+ * Komponente mit dem Tag &lt;hs-create-lieferbar&gt;, um das Erfassungsformular
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-isbn',
-    templateUrl: './create-isbn.component.html',
+    selector: 'hs-create-newsletter',
+    templateUrl: './create-newsletter.component.html',
 })
-export class CreateIsbnComponent implements OnInit {
+export class CreateNewsletterComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly isbn = new FormControl(undefined, [
-        Validators.required,
-        Validators.pattern(ISBN_REGEX),
-    ]);
+    readonly newsletter = new FormControl(false);
 
     ngOnInit() {
-        console.log('CreateIsbnComponent.ngOnInit');
+        console.log('CreateNewsletterComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('isbn', this.isbn);
+        this.form.addControl('newsletter', this.newsletter);
     }
 }

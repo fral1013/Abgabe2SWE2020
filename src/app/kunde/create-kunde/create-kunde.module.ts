@@ -18,9 +18,8 @@
 import { CommonModule } from '@angular/common';
 import { CreateGeburtsdatumModule } from './create-geburtsdatum.module';
 import { CreateGeschlechtModule } from './create-geschlecht.module';
-import { CreateIsbnModule } from './create-isbn.module';
 import { CreateKundeComponent } from './create-kunde.component';
-import { CreateLieferbarModule } from './create-lieferbar.module';
+import { CreateNewsletterModule } from './create-newsletter.module';
 import { CreateRatingModule } from './create-rating.module';
 import { CreateSchlagwoerterModule } from './create-schlagwoerter.module';
 import { CreateTitelModule } from './create-titel.module';
@@ -44,8 +43,7 @@ import { Title } from '@angular/platform-browser';
         ReactiveFormsModule,
         CreateGeschlechtModule,
         CreateGeburtsdatumModule,
-        CreateIsbnModule,
-        CreateLieferbarModule,
+        CreateNewsletterModule,
         CreateRatingModule,
         CreateSchlagwoerterModule,
         CreateTitelModule,
