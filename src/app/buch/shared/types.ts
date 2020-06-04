@@ -15,4 +15,4 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export { Suchkriterien } from './buch.service';
+export { Suchkriterien } from './kunde.service';

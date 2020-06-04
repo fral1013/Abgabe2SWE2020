@@ -15,6 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export { Buch, ISBN_REGEX } from './buch';
-export { BuchService } from './buch.service';
+export { Kunde } from './kunde';
+export { KundeService } from './kunde.service';
 export { FindError, RemoveError, SaveError } from './errors';
