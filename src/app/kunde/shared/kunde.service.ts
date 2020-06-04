@@ -24,7 +24,7 @@ import type {
     ChartData,
     ChartDataSets,
 } from 'chart.js';
-import type { Familienstand, KundeGeschlecht, KundeServer } from './kunde';
+import type { Familienstand, Geschlecht, KundeServer } from './kunde';
 import { FindError, RemoveError, SaveError } from './errors';
 // Bereitgestellt durch HttpClientModule
 // HttpClientModule enthaelt nur Services, keine Komponenten
@@ -480,7 +480,7 @@ export class KundeService {
 export interface Suchkriterien {
     nachname: string;
     familienstand: Familienstand | '';
-    geschlecht: KundeGeschlecht | '';
+    geschlecht: Geschlecht | '';
     interessen: { javascript: boolean; typescript: boolean };
 }
 /* eslint-enable max-lines,no-null/no-null */
