@@ -16,15 +16,11 @@
  */
 
 import { CommonModule } from '@angular/common';
-// eslint-disable-next-line import/named
 import { CreateGeburtsdatumModule } from './create-geburtsdatum.module';
-// eslint-disable-next-line import/named
 import { CreateGeschlechtModule } from './create-geschlecht.module';
 import { CreateIsbnModule } from './create-isbn.module';
 import { CreateKundeComponent } from './create-kunde.component';
 import { CreateLieferbarModule } from './create-lieferbar.module';
-import { CreatePreisModule } from './create-preis.module';
-import { CreateRabattModule } from './create-rabatt.module';
 import { CreateRatingModule } from './create-rating.module';
 import { CreateSchlagwoerterModule } from './create-schlagwoerter.module';
 import { CreateTitelModule } from './create-titel.module';
@@ -50,8 +46,6 @@ import { Title } from '@angular/platform-browser';
         CreateGeburtsdatumModule,
         CreateIsbnModule,
         CreateLieferbarModule,
-        CreatePreisModule,
-        CreateRabattModule,
         CreateRatingModule,
         CreateSchlagwoerterModule,
         CreateTitelModule,
