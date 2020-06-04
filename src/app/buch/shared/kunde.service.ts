@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { BASE_URI, BUECHER_PATH_REST } from '../../shared';
-import type { BuchArt, BuchServer, Verlag } from './buch';
+import { BASE_URI, KUNDEN_PATH_REST } from '../../shared';
 import type {
     ChartColor,
     ChartConfiguration,
     ChartData,
     ChartDataSets,
 } from 'chart.js';
+import type { Familienstand, KundeGeschlecht, KundeServer } from './kunde';
 import { FindError, RemoveError, SaveError } from './errors';
 // Bereitgestellt durch HttpClientModule
 // HttpClientModule enthaelt nur Services, keine Komponenten
@@ -34,9 +34,9 @@ import {
     HttpHeaders,
     HttpParams,
 } from '@angular/common/http';
-import { Buch } from './buch';
 import { DiagrammService } from '../../shared/diagramm.service';
 import { Injectable } from '@angular/core';
+import { Kunde } from './kunde';
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Subject.ts
 // https://github.com/ReactiveX/rxjs/blob/master/src/internal/Observable.ts
 import { Subject } from 'rxjs';
@@ -60,19 +60,19 @@ import { Subject } from 'rxjs';
  */
 /* eslint-disable no-underscore-dangle */
 @Injectable({ providedIn: 'root' })
-export class BuchService {
+export class KundeService {
     // Observables = Event-Streaming mit Promises
     // Subject statt Basisklasse Observable:
     // in find() und findById() wird next() aufgerufen
-    readonly buecherSubject = new Subject<Array<Buch>>();
+    readonly kundenSubject = new Subject<Array<Kunde>>();
 
-    readonly buchSubject = new Subject<Buch>();
+    readonly kundeSubject = new Subject<Kunde>();
 
     readonly errorSubject = new Subject<string | number>();
 
-    private readonly baseUriBuecher!: string;
+    private readonly baseUriKunden!: string;
 
-    private _buch!: Buch;
+    private _kunde!: Kunde;
 
     /**
      * @param diagrammService injizierter DiagrammService
@@ -83,33 +83,33 @@ export class BuchService {
         private readonly diagrammService: DiagrammService,
         private readonly httpClient: HttpClient,
     ) {
-        this.baseUriBuecher = `${BASE_URI}/${BUECHER_PATH_REST}`;
+        this.baseUriKunden = `${BASE_URI}/${KUNDEN_PATH_REST}`;
         console.log(
-            `BuchService.constructor(): baseUriBuch=${this.baseUriBuecher}`,
+            `KundeService.constructor(): baseUriKunde=${this.baseUriKunden}`,
         );
     }
 
     /**
-     * Ein Buch-Objekt puffern.
-     * @param buch Das Buch-Objekt, das gepuffert wird.
+     * Ein Kunde-Objekt puffern.
+     * @param kunde Das Kunde-Objekt, das gepuffert wird.
      * @return void
      */
-    set buch(buch: Buch) {
-        console.log('BuchService.set buch()', buch);
-        this._buch = buch;
+    set kunde(kunde: Kunde) {
+        console.log('KundeService.set kunde()', kunde);
+        this._kunde = kunde;
     }
 
     /**
-     * Buecher anhand von Suchkriterien suchen
+     * Kunden anhand von Suchkriterien suchen
      * @param suchkriterien Die Suchkriterien
-     * @returns Gefundene Buecher oder Statuscode des fehlerhaften GET-Requests
+     * @returns Gefundene Kunden oder Statuscode des fehlerhaften GET-Requests
      */
     // eslint-disable-next-line unicorn/no-useless-undefined
     async find(suchkriterien: Suchkriterien | undefined = undefined) {
-        console.log('BuchService.find(): suchkriterien=', suchkriterien);
+        console.log('KundeService.find(): suchkriterien=', suchkriterien);
         const params = this.suchkriterienToHttpParams(suchkriterien);
-        const uri = this.baseUriBuecher;
-        console.log(`BuchService.find(): uri=${uri}`);
+        const uri = this.baseUriKunden;
+        console.log(`KundeService.find(): uri=${uri}`);
 
         // Observable.subscribe() aus RxJS liefert ein Subscription Objekt,
         // das mit einem Flow von Kotlin vergleichbar ist.
@@ -120,18 +120,18 @@ export class BuchService {
         // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
         // https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/subscribe.md
 
-        let buecher;
+        let kunden;
         try {
-            const buecherServer = await this.httpClient
-                .get<Array<BuchServer>>(uri, { params })
+            const kundenServer = await this.httpClient
+                .get<Array<KundeServer>>(uri, { params })
                 .toPromise();
-            buecher = buecherServer.map(buch => Buch.fromServer(buch));
+            kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
         } catch (err) {
             throw this.buildFindError(err);
         }
 
-        console.log('BuchService.find(): buecher=', buecher);
-        return buecher;
+        console.log('KundeService.find(): kunden=', kunden);
+        return kunden;
 
         // Same-Origin-Policy verhindert Ajax-Datenabfragen an einen Server in
         // einer anderen Domain. JSONP (= JSON mit Padding) ermoeglicht die
@@ -140,37 +140,37 @@ export class BuchService {
     }
 
     /**
-     * Ein Buch anhand der ID suchen
-     * @param id Die ID des gesuchten Buchs
+     * Ein Kunde anhand der ID suchen
+     * @param id Die ID des gesuchten Kunden
      */
     async findById(id: string | undefined) {
-        console.log(`BuchService.findById(): id=${id}`);
+        console.log(`KundeService.findById(): id=${id}`);
 
-        // Gibt es ein gepuffertes Buch mit der gesuchten ID und Versionsnr.?
+        // Gibt es ein gepuffertes Kunde mit der gesuchten ID und Versionsnr.?
         if (
-            this._buch !== undefined &&
-            this._buch._id === id &&
-            this._buch.version !== undefined
+            this._kunde !== undefined &&
+            this._kunde._id === id &&
+            this._kunde.version !== undefined
         ) {
             console.log(
-                `BuchService.findById(): Buch gepuffert, version=${this._buch.version}`,
+                `KundeService.findById(): Kunde gepuffert, version=${this._kunde.version}`,
             );
-            return this._buch;
+            return this._kunde;
         }
 
         if (id === undefined) {
-            console.log('BuchService.findById(): Keine Id');
+            console.log('KundeService.findById(): Keine Id');
             return;
         }
 
         // wegen fehlender Versionsnummer (im ETag) nachladen
-        console.log('BuchService.findById(): GET-Request');
-        const uri = `${this.baseUriBuecher}/${id}`;
+        console.log('KundeService.findById(): GET-Request');
+        const uri = `${this.baseUriKunden}/${id}`;
         let response;
         try {
             // Observable.subscribe() aus RxJS liefert ein Subscription Objekt
             response = await this.httpClient
-                .get<BuchServer>(uri, { observe: 'response' })
+                .get<KundeServer>(uri, { observe: 'response' })
                 .toPromise();
         } catch (err) {
             throw this.buildFindError(err);
@@ -183,17 +183,17 @@ export class BuchService {
         const etag = response.headers.get('ETag') ?? undefined;
         console.log(`etag = ${etag}`);
 
-        this._buch = Buch.fromServer(body, etag);
-        return this._buch;
+        this._kunde = Kunde.fromServer(body, etag);
+        return this._kunde;
     }
 
     /**
-     * Ein neues Buch anlegen
-     * @param neuesBuch Das JSON-Objekt mit dem neuen Buch
+     * Ein neues Kunde anlegen
+     * @param neuesKunde Das JSON-Objekt mit dem neuen Kunde
      */
-    async save(buch: Buch) {
-        console.log('BuchService.save(): buch=', buch);
-        buch.datum = new Date();
+    async save(kunde: Kunde) {
+        console.log('KundeService.save(): kunde=', kunde);
+        kunde.datum = new Date();
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
@@ -204,50 +204,50 @@ export class BuchService {
         let response;
         try {
             response = await this.httpClient
-                .post(this.baseUriBuecher, buch.toJSON(), {
+                .post(this.baseUriKunden, kunde.toJSON(), {
                     headers,
                     observe: 'response',
                     responseType: 'text',
                 })
                 .toPromise();
         } catch (err) {
-            console.error('BuchService.save(): err=', err);
+            console.error('KundeService.save(): err=', err);
             throw new SaveError(err.status, err.error, err);
         }
 
-        console.log('BuchService.save(): map(): response', response);
+        console.log('KundeService.save(): map(): response', response);
         const location = response.headers.get('Location');
         return location?.slice(location.lastIndexOf('/') + 1);
     }
 
     /**
-     * Ein vorhandenes Buch aktualisieren
-     * @param buch Das JSON-Objekt mit den aktualisierten Buchdaten
+     * Ein vorhandenes Kunde aktualisieren
+     * @param kunde Das JSON-Objekt mit den aktualisierten Kundendaten
      * @param successFn Die Callback-Function fuer den Erfolgsfall
      * @param errorFn Die Callback-Function fuer den Fehlerfall
      */
     async update(
-        buch: Buch,
+        kunde: Kunde,
         successFn: () => Promise<void>,
         errorFn: (
             status: number,
             errors: { [s: string]: unknown } | undefined,
         ) => void,
     ) {
-        console.log('BuchService.update(): buch=', buch);
+        console.log('KundeService.update(): kunde=', kunde);
 
-        const { version } = buch;
+        const { version } = kunde;
         if (version === undefined) {
-            console.error(`Keine Versionsnummer fuer das Buch ${buch._id}`);
+            console.error(`Keine Versionsnummer fuer das Kunde ${kunde._id}`);
             return;
         }
         const successFnPut = async () => {
             await successFn();
             // Wenn Update erfolgreich war, dann wurde serverseitig die Versionsnr erhoeht
-            if (buch.version === undefined) {
-                buch.version = 1;
+            if (kunde.version === undefined) {
+                kunde.version = 1;
             } else {
-                buch.version++;
+                kunde.version++;
             }
         };
 
@@ -264,7 +264,7 @@ export class BuchService {
             }
         };
 
-        const uri = `${this.baseUriBuecher}/${buch._id}`;
+        const uri = `${this.baseUriKunden}/${kunde._id}`;
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
             Accept: 'text/plain',
@@ -272,7 +272,7 @@ export class BuchService {
         });
         console.log('headers=', headers);
         try {
-            await this.httpClient.put(uri, buch, { headers }).toPromise();
+            await this.httpClient.put(uri, kunde, { headers }).toPromise();
         } catch (err) {
             errorFnPut(err);
             return;
@@ -282,17 +282,17 @@ export class BuchService {
     }
 
     /**
-     * Ein Buch l&ouml;schen
-     * @param buch Das JSON-Objekt mit dem zu loeschenden Buch
+     * Ein Kunde l&ouml;schen
+     * @param kunde Das JSON-Objekt mit dem zu loeschenden Kunde
      */
-    async remove(buch: Buch) {
-        console.log('BuchService.remove(): buch=', buch);
-        const uri = `${this.baseUriBuecher}/${buch._id}`;
+    async remove(kunde: Kunde) {
+        console.log('KundeService.remove(): kunde=', kunde);
+        const uri = `${this.baseUriKunden}/${kunde._id}`;
 
         try {
             await this.httpClient.delete(uri).toPromise();
         } catch (err) {
-            console.log('BuchService.remove(): err=', err);
+            console.log('KundeService.remove(): err=', err);
             throw new RemoveError(err.status);
         }
     }
@@ -325,19 +325,19 @@ export class BuchService {
      * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
      */
     async createBarChart(chartElement: HTMLCanvasElement) {
-        console.log('BuchService.createBarChart()');
-        const buecher = await this.find();
+        console.log('KundeService.createBarChart()');
+        const kunden = await this.find();
 
-        const buecherGueltig = buecher.filter(
-            b => b._id !== undefined && b.rating !== undefined,
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
         );
 
-        const labels = buecherGueltig
-            .map(b => b._id)
+        const labels = kundenGueltig
+            .map(k => k._id)
             .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
-        console.log('BuchService.createBarChart(): labels:', labels);
+        console.log('KundeService.createBarChart(): labels:', labels);
 
-        const data = buecherGueltig.map(b => b.rating);
+        const data = kundenGueltig.map(k => k.kategorie);
         const datasets: Array<ChartDataSets> = [{ label: 'Bewertung', data }];
 
         const config: ChartConfiguration = {
@@ -353,18 +353,18 @@ export class BuchService {
      * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
      */
     async createLinearChart(chartElement: HTMLCanvasElement) {
-        console.log('BuchService.createLinearChart()');
-        const buecher = await this.find();
-        const buecherGueltig = buecher.filter(
-            b => b._id !== undefined && b.rating !== undefined,
+        console.log('KundeService.createLinearChart()');
+        const kunden = await this.find();
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
         );
 
-        const labels = buecherGueltig
-            .map(b => b._id)
+        const labels = kundenGueltig
+            .map(k => k._id)
             .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
-        console.log('BuchService.createLinearChart(): labels:', labels);
+        console.log('KundeService.createLinearChart(): labels:', labels);
 
-        const data = buecherGueltig.map(b => b.rating);
+        const data = kundenGueltig.map(k => k.kategorie);
         const datasets: Array<ChartDataSets> = [{ label: 'Bewertung', data }];
 
         const config: ChartConfiguration = {
@@ -380,21 +380,21 @@ export class BuchService {
      * @param chartElement Das HTML-Element zum Tag <code>canvas</code>
      */
     async createPieChart(chartElement: HTMLCanvasElement) {
-        console.log('BuchService.createPieChart()');
-        const buecher = await this.find();
-        const buecherGueltig = buecher.filter(
-            b => b._id !== undefined && b.rating !== undefined,
+        console.log('KundeService.createPieChart()');
+        const kunden = await this.find();
+        const kundenGueltig = kunden.filter(
+            k => k._id !== undefined && k.kategorie !== undefined,
         );
 
-        const labels = buecherGueltig
-            .map(b => b._id)
+        const labels = kundenGueltig
+            .map(k => k._id)
             .map(id => (id === undefined ? '?' : id)); // eslint-disable-line no-extra-parens
-        console.log('BuchService.createPieChart(): labels:', labels);
+        console.log('KundeService.createPieChart(): labels:', labels);
 
-        const ratings = buecherGueltig.map(b => b.rating);
+        const kategorien = kundenGueltig.map(k => k.kategorie);
         const backgroundColor: Array<ChartColor> = [];
         const hoverBackgroundColor: Array<ChartColor> = [];
-        for (let i = 0; i < ratings.length; i++) {
+        for (let i = 0; i < kategorien.length; i++) {
             backgroundColor.push(this.diagrammService.getBackgroundColor(i));
             hoverBackgroundColor.push(
                 this.diagrammService.getHoverBackgroundColor(i),
@@ -405,7 +405,7 @@ export class BuchService {
             labels,
             datasets: [
                 {
-                    data: ratings,
+                    data: kategorien,
                     backgroundColor,
                     hoverBackgroundColor,
                 },
@@ -425,7 +425,7 @@ export class BuchService {
         suchkriterien: Suchkriterien | undefined,
     ): HttpParams {
         console.log(
-            'BuchService.suchkriterienToHttpParams(): suchkriterien=',
+            'KundeService.suchkriterienToHttpParams(): suchkriterien=',
             suchkriterien,
         );
         let httpParams = new HttpParams();
@@ -434,17 +434,22 @@ export class BuchService {
             return httpParams;
         }
 
-        const { titel, verlag, art, schlagwoerter } = suchkriterien;
-        const { javascript, typescript } = schlagwoerter;
+        const {
+            nachname,
+            familienstand,
+            geschlecht,
+            interessen,
+        } = suchkriterien;
+        const { javascript, typescript } = interessen;
 
-        if (titel !== '') {
-            httpParams = httpParams.set('titel', titel);
+        if (nachname !== '') {
+            httpParams = httpParams.set('nachname', nachname);
         }
-        if (art !== '') {
-            httpParams = httpParams.set('art', art);
+        if (geschlecht !== '') {
+            httpParams = httpParams.set('geschlecht', geschlecht);
         }
-        if (verlag !== '') {
-            httpParams = httpParams.set('verlag', verlag);
+        if (familienstand !== '') {
+            httpParams = httpParams.set('familienstand', familienstand);
         }
         if (javascript) {
             httpParams = httpParams.set('javascript', 'true');
@@ -465,7 +470,7 @@ export class BuchService {
 
         const { status, error }: { status: number; error: string } = err;
         console.log(
-            `BuchService.buildFindError(): status=${status}, Response-Body=${error}`,
+            `KundeService.buildFindError(): status=${status}, Response-Body=${error}`,
         );
         return new FindError(status, error, err);
     }
@@ -473,9 +478,9 @@ export class BuchService {
 /* eslint-enable no-underscore-dangle */
 
 export interface Suchkriterien {
-    titel: string;
-    verlag: Verlag | '';
-    art: BuchArt | '';
-    schlagwoerter: { javascript: boolean; typescript: boolean };
+    nachname: string;
+    familienstand: Familienstand | '';
+    geschlecht: KundeGeschlecht | '';
+    interessen: { javascript: boolean; typescript: boolean };
 }
 /* eslint-enable max-lines,no-null/no-null */
