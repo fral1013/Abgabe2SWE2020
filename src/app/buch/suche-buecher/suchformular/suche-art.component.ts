@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import type { BuchArt } from '../../shared/buch';
+import type { BuchArt } from '../../shared/kunde';
 import { Component } from '@angular/core';
 import { fadeIn } from '../../../shared';
 

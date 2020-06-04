@@ -18,7 +18,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
-import type { Verlag } from '../../shared/buch';
+import type { Verlag } from '../../shared/kunde';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>

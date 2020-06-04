@@ -17,7 +17,7 @@
 
 import { Component } from '@angular/core';
 
-import type { Verlag } from '../../shared/buch';
+import type { Verlag } from '../../shared/kunde';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-suche-verlag</code>

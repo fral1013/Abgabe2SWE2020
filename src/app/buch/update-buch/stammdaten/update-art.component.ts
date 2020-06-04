@@ -17,7 +17,7 @@
 
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import type { BuchArt } from '../../shared/buch';
+import type { BuchArt } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
