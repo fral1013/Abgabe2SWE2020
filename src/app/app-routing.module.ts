@@ -33,12 +33,12 @@ const routes: Routes = [
         component: HomeComponent,
     },
     {
-        path: 'buecher',
+        path: 'kunden',
         // Lazy Loading durch dynamische Imports
         // loadChildren statt component wie bei 'home'
         loadChildren: async () => {
-            const mod = await import('./buch/buch-routing.module');
-            return mod.BuchRoutingModule;
+            const mod = await import('./kunde/kunde-routing.module');
+            return mod.KundeRoutingModule;
         },
     },
 ];

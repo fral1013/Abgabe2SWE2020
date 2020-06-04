@@ -18,10 +18,10 @@
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BuchModule } from './buch/buch.module';
 import { FooterModule } from './layout/footer/footer.module';
 import { HeaderModule } from './layout/header/header.module';
 import { HomeModule } from './home/home.module';
+import { KundeModule } from './kunde/kunde.module';
 import { MainModule } from './layout/main/main.module';
 import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -57,7 +57,7 @@ import { environment } from '../environments/environment';
 
         AppRoutingModule,
         HomeModule,
-        BuchModule,
+        KundeModule,
         FooterModule,
         HeaderModule,
         MainModule,

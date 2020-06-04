@@ -17,7 +17,7 @@
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import type { AfterViewInit } from '@angular/core';
-import { BuchService } from '../shared';
+import { KundeService } from '../shared';
 import { Title } from '@angular/platform-browser';
 
 /**
@@ -35,7 +35,7 @@ export class BalkendiagrammComponent implements AfterViewInit {
     chartCanvas!: ElementRef<HTMLCanvasElement>;
 
     constructor(
-        private readonly buchService: BuchService,
+        private readonly kundeService: KundeService,
         private readonly titleService: Title,
     ) {
         console.log('BalkendiagrammComponent.constructor()');
@@ -48,7 +48,7 @@ export class BalkendiagrammComponent implements AfterViewInit {
      * https://angular.io/docs/ts/latest/guide/lifecycle-hooks.html.
      */
     async ngAfterViewInit() {
-        await this.buchService.createBarChart(this.chartCanvas.nativeElement);
+        await this.kundeService.createBarChart(this.chartCanvas.nativeElement);
         this.titleService.setTitle('Balkendiagramm');
     }
 }
