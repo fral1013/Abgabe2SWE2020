@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { CreateSchlagwoerterComponent } from './create-schlagwoerter.component';
+import { CreateInteressenComponent } from './create-interessen.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [CreateSchlagwoerterComponent],
-    exports: [CreateSchlagwoerterComponent],
+    declarations: [CreateInteressenComponent],
+    exports: [CreateInteressenComponent],
     imports: [ReactiveFormsModule],
 })
-export class CreateSchlagwoerterModule {}
+export class CreateInteressenModule {}

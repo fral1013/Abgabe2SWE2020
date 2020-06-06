@@ -19,11 +19,11 @@ import { CommonModule } from '@angular/common';
 import { CreateFamilienstandModule } from './create-familienstand.module';
 import { CreateGeburtsdatumModule } from './create-geburtsdatum.module';
 import { CreateGeschlechtModule } from './create-geschlecht.module';
+import { CreateInteressenModule } from './create-interessen.module';
 import { CreateKategorieModule } from './create-kategorie.module';
 import { CreateKundeComponent } from './create-kunde.component';
 import { CreateNachnameModule } from './create-nachname.module';
 import { CreateNewsletterModule } from './create-newsletter.module';
-import { CreateSchlagwoerterModule } from './create-schlagwoerter.module';
 import { ErrorMessageModule } from '../../shared/error-message.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -45,7 +45,7 @@ import { Title } from '@angular/platform-browser';
         CreateGeburtsdatumModule,
         CreateNewsletterModule,
         CreateKategorieModule,
-        CreateSchlagwoerterModule,
+        CreateInteressenModule,
         CreateNachnameModule,
         CreateFamilienstandModule,
         ErrorMessageModule,

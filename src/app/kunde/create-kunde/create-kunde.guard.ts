@@ -21,7 +21,6 @@ import {
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
-// eslint-disable-next-line import/named
 import { CreateKundeComponent } from './create-kunde.component';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

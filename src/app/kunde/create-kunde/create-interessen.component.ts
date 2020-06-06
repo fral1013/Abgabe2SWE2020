@@ -24,21 +24,24 @@ import type { OnInit } from '@angular/core';
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-schlagwoerter',
-    templateUrl: './create-schlagwoerter.component.html',
+    selector: 'hs-create-interessen',
+    templateUrl: './create-interessen.component.html',
 })
-export class CreateSchlagwoerterComponent implements OnInit {
+export class CreateInteressenComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly javascript = new FormControl(false);
+    readonly lesen = new FormControl(false);
 
-    readonly typescript = new FormControl(false);
+    readonly reisen = new FormControl(false);
+
+    readonly sport = new FormControl(false);
 
     ngOnInit() {
-        console.log('CreateSchlagwoerterComponent.ngOnInit');
+        console.log('CreateInteressenComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('javascript', this.javascript);
-        this.form.addControl('typescript', this.typescript);
+        this.form.addControl('lesen', this.lesen);
+        this.form.addControl('reisen', this.reisen);
+        this.form.addControl('sport', this.sport);
     }
 }
