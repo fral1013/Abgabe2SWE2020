@@ -15,13 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { CreateRatingComponent } from './create-rating.component';
+import { CommonModule } from '@angular/common';
+import { CreateFamilienstandComponent } from './create-familienstand.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [CreateRatingComponent],
-    exports: [CreateRatingComponent],
-    imports: [ReactiveFormsModule],
+    declarations: [CreateFamilienstandComponent],
+    exports: [CreateFamilienstandComponent],
+    imports: [CommonModule, ReactiveFormsModule],
 })
-export class CreateRatingModule {}
+export class CreateFamilienstandModule {}

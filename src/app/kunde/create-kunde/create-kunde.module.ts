@@ -16,14 +16,14 @@
  */
 
 import { CommonModule } from '@angular/common';
+import { CreateFamilienstandModule } from './create-familienstand.module';
 import { CreateGeburtsdatumModule } from './create-geburtsdatum.module';
 import { CreateGeschlechtModule } from './create-geschlecht.module';
+import { CreateInteressenModule } from './create-interessen.module';
+import { CreateKategorieModule } from './create-kategorie.module';
 import { CreateKundeComponent } from './create-kunde.component';
+import { CreateNachnameModule } from './create-nachname.module';
 import { CreateNewsletterModule } from './create-newsletter.module';
-import { CreateRatingModule } from './create-rating.module';
-import { CreateSchlagwoerterModule } from './create-schlagwoerter.module';
-import { CreateTitelModule } from './create-titel.module';
-import { CreateVerlagModule } from './create-verlag.module';
 import { ErrorMessageModule } from '../../shared/error-message.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -44,10 +44,10 @@ import { Title } from '@angular/platform-browser';
         CreateGeschlechtModule,
         CreateGeburtsdatumModule,
         CreateNewsletterModule,
-        CreateRatingModule,
-        CreateSchlagwoerterModule,
-        CreateTitelModule,
-        CreateVerlagModule,
+        CreateKategorieModule,
+        CreateInteressenModule,
+        CreateNachnameModule,
+        CreateFamilienstandModule,
         ErrorMessageModule,
     ],
     providers: [Title],

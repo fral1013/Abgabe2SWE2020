@@ -16,26 +16,26 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-verlag&gt;, um das Erfassungsformular
- * f&uuml;r ein neues Buch zu realisieren.
+ * Komponente mit dem Tag &lt;hs-create-rating&gt;, um das Erfassungsformular
+ * f&uuml;r ein neuen Kunden zu realisieren.
  */
 @Component({
-    selector: 'hs-create-verlag',
-    templateUrl: './create-verlag.component.html',
+    selector: 'hs-create-kategorie',
+    templateUrl: './create-kategorie.component.html',
 })
-export class CreateVerlagComponent implements OnInit {
+export class CreateKategorieComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly verlag = new FormControl(undefined, Validators.required);
+    readonly kategorie = new FormControl(undefined);
 
     ngOnInit() {
-        console.log('CreateVerlagComponent.ngOnInit');
+        console.log('CreateKategorieComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('verlag', this.verlag);
+        this.form.addControl('rating', this.kategorie);
     }
 }

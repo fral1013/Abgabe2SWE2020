@@ -16,26 +16,39 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-rating&gt;, um das Erfassungsformular
+ * Komponente mit dem Tag &lt;hs-create-nachname&gt;, um das Erfassungsformular
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-rating',
-    templateUrl: './create-rating.component.html',
+    // moduleId: module.id,
+    selector: 'hs-create-nachname',
+    templateUrl: './create-nachname.component.html',
 })
-export class CreateRatingComponent implements OnInit {
+export class CreateNachnameComponent implements OnInit {
+    private static readonly MIN_LENGTH = 2;
+
     @Input()
     readonly form!: FormGroup;
 
-    readonly rating = new FormControl(undefined);
+    // Keine Vorbelegung bzw. der leere String, da es Placeholder gibt
+    // Varianten fuer Validierung:
+    //    serverseitig mittels Request/Response
+    //    clientseitig bei den Ereignissen keyup, change, blur, ...
+    // Ein Endbenutzer bewirkt staendig einen neuen Fehlerstatus
+    readonly nachname = new FormControl(undefined, [
+        Validators.required,
+        Validators.minLength(CreateNachnameComponent.MIN_LENGTH),
+        Validators.pattern(/^\w.*$/u),
+    ]);
+    // readonly titelGroup = new FormGroup({ titel: this.titel })
 
     ngOnInit() {
-        console.log('CreateRatingComponent.ngOnInit');
+        console.log('CreateNachnameComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('rating', this.rating);
+        this.form.addControl('nachname', this.nachname);
     }
 }

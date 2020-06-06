@@ -16,26 +16,22 @@
 -->
 
 <div class="form-group row">
-  <label for="schlagwoerterInput" class="col col-2 form-control-label">
-    Schlagw&ouml;rter
-  </label>
+  <label class="col col-2 form-control-label">Kategorie</label>
   <div class="col col-10" [formGroup]="form">
-    <div class="checkbox">
-      <input
-        type="checkbox"
-        id="javascriptInput"
-        formControlName="javascript"
-      />
-      <label for="javascriptInput" class="ml-1">JavaScript</label>
-    </div>
-
-    <div class="checkbox">
-      <input
-        type="checkbox"
-        id="typescriptInput"
-        formControlName="typescript"
-      />
-      <label for="typescriptInput" class="ml-1">TypeScript</label>
-    </div>
+    <select class="form-control" formControlName="kategorie">
+      <option value="">Kategorie ausw&auml;hlen</option>
+      <optgroup label="Top-Kunde"> <option value="9L">9L</option> 
+      </optgroup>
+      <optgroup label="Stammkunde">
+        <option value="8L">8L</option> <option value="7L">7L</option> <option value="6L">6L</option>
+      </optgroup>
+      <optgroup label="Bestandskunde">
+        <option value="5L">5L</option> <option value="4L">4L</option> <option value="3L">3L</option>
+      <optgroup label="Neukunde">
+          <option value="2L">2L</option> <option value="1L">1L</option>
+      <optgroup label="Interessent">
+            <option value="0L">OL</option>
+      </optgroup>
+    </select>
   </div>
 </div>
