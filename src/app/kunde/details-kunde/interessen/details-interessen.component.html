@@ -15,11 +15,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<div class="form-group row" *ngFor="let schlagwort of values">
+<div class="form-group row" *ngFor="let interesse of values">
   <div class="col col-11">
     <div class="checkbox">
       <input type="checkbox" checked disabled class="checkbox" />
-      <label class="ml-2" [ngSwitch]="schlagwort">
+      <label class="ml-2" [ngSwitch]="interesse">
         <span *ngSwitchCase="'JAVASCRIPT'">JavaScript</span>
         <span *ngSwitchCase="'TYPESCRIPT'">TypeScript</span>
       </label>

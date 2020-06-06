@@ -16,12 +16,12 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { DetailsSchlagwoerterComponent } from './details-schlagwoerter.component';
+import { DetailsInteressenComponent } from './details-interessen.component';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    declarations: [DetailsSchlagwoerterComponent],
-    exports: [DetailsSchlagwoerterComponent],
+    declarations: [DetailsInteressenComponent],
+    exports: [DetailsInteressenComponent],
     imports: [CommonModule],
 })
-export class DetailsSchlagwoerterModule {}
+export class DetailsInteressenModule {}
