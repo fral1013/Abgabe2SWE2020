@@ -16,13 +16,13 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { CreateVerlagComponent } from './create-verlag.component';
+import { CreateFamilienstandComponent } from './create-familienstand.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [CreateVerlagComponent],
-    exports: [CreateVerlagComponent],
+    declarations: [CreateFamilienstandComponent],
+    exports: [CreateFamilienstandComponent],
     imports: [CommonModule, ReactiveFormsModule],
 })
-export class CreateVerlagModule {}
+export class CreateFamilienstandModule {}

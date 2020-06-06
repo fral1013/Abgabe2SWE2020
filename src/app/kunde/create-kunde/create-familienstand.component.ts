@@ -24,18 +24,18 @@ import type { OnInit } from '@angular/core';
  * f&uuml;r ein neues Buch zu realisieren.
  */
 @Component({
-    selector: 'hs-create-verlag',
-    templateUrl: './create-verlag.component.html',
+    selector: 'hs-create-familienstand',
+    templateUrl: './create-familienstand.component.html',
 })
-export class CreateVerlagComponent implements OnInit {
+export class CreateFamilienstandComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly verlag = new FormControl(undefined, Validators.required);
+    readonly familienstand = new FormControl(undefined, Validators.required);
 
     ngOnInit() {
-        console.log('CreateVerlagComponent.ngOnInit');
+        console.log('CreateFamilienstandComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('verlag', this.verlag);
+        this.form.addControl('famlienstand', this.familienstand);
     }
 }
