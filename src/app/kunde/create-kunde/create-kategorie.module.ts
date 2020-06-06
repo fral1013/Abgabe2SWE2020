@@ -15,13 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { CreateRatingComponent } from './create-rating.component';
+// eslint-disable-next-line import/named
+import { CreateKategorieComponent } from './create-kategorie.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [CreateRatingComponent],
-    exports: [CreateRatingComponent],
+    declarations: [CreateKategorieComponent],
+    exports: [CreateKategorieComponent],
     imports: [ReactiveFormsModule],
 })
-export class CreateRatingModule {}
+export class CreateKategorieModule {}

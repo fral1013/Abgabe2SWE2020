@@ -21,21 +21,21 @@ import type { OnInit } from '@angular/core';
 
 /**
  * Komponente mit dem Tag &lt;hs-create-rating&gt;, um das Erfassungsformular
- * f&uuml;r ein neues Buch zu realisieren.
+ * f&uuml;r ein neuen Kunden zu realisieren.
  */
 @Component({
-    selector: 'hs-create-rating',
-    templateUrl: './create-rating.component.html',
+    selector: 'hs-create-kategorie',
+    templateUrl: './create-kategorie.component.html',
 })
-export class CreateRatingComponent implements OnInit {
+export class CreateKategorieComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly rating = new FormControl(undefined);
+    readonly kategorie = new FormControl(undefined);
 
     ngOnInit() {
-        console.log('CreateRatingComponent.ngOnInit');
+        console.log('CreateKategorieComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('rating', this.rating);
+        this.form.addControl('rating', this.kategorie);
     }
 }
