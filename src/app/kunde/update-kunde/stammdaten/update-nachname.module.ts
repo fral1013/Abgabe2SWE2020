@@ -19,11 +19,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { UpdateIsbnComponent } from './update-isbn.component';
+import { UpdateNachnameComponent } from './update-nachname.component';
 
 @NgModule({
-    declarations: [UpdateIsbnComponent],
-    exports: [UpdateIsbnComponent],
+    declarations: [UpdateNachnameComponent],
+    exports: [UpdateNachnameComponent],
     imports: [CommonModule, ReactiveFormsModule],
 })
-export class UpdateIsbnModule {}
+export class UpdateNachnameModule {}
