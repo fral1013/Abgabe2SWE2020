@@ -16,7 +16,7 @@
  */
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { Buch, BuchService, FindError } from '../shared';
+import { FindError, Kunde, KundeService } from '../shared';
 import type { OnDestroy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { HttpStatus } from '../../shared';
@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-update-buch</code> mit Kindkomponenten
+ * Komponente f&uuml;r das Tag <code>hs-update-kunde</code> mit Kindkomponenten
  * f&uuml;r die folgenden Tags:
  * <ul>
  *  <li> <code>hs-stammdaten</code>
@@ -32,22 +32,22 @@ import { Title } from '@angular/platform-browser';
  * </ul>
  */
 @Component({
-    selector: 'hs-update-buch',
-    templateUrl: './update-buch.component.html',
+    selector: 'hs-update-kunde',
+    templateUrl: './update-kunde.component.html',
 })
-export class UpdateBuchComponent implements OnInit, OnDestroy {
-    buch: Buch | undefined;
+export class UpdateKundeComponent implements OnInit, OnDestroy {
+    kunde: Kunde | undefined;
 
     errorMsg: string | undefined;
 
     private idParamSubscription!: Subscription;
 
     constructor(
-        private readonly buchService: BuchService,
+        private readonly kundeService: KundeService,
         private readonly titleService: Title,
         private readonly route: ActivatedRoute,
     ) {
-        console.log('UpdateBuchComponent.constructor()');
+        console.log('UpdateKundeComponent.constructor()');
     }
 
     ngOnInit() {
@@ -66,7 +66,7 @@ export class UpdateBuchComponent implements OnInit, OnDestroy {
             console.log('params=', params);
             (async () => {
                 try {
-                    this.buch = await this.buchService.findById(params.id);
+                    this.kunde = await this.kundeService.findById(params.id);
                 } catch (err) {
                     this.handleError(err);
                 }
@@ -80,14 +80,14 @@ export class UpdateBuchComponent implements OnInit, OnDestroy {
     private handleError(err: FindError) {
         const { statuscode } = err;
         console.log(
-            `UpdateBuchComponent.handleError(): statuscode=${statuscode}`,
+            `UpdateKundeComponent.handleError(): statuscode=${statuscode}`,
         );
 
-        this.buch = undefined;
+        this.kunde = undefined;
 
         switch (statuscode) {
             case HttpStatus.NOT_FOUND:
-                this.errorMsg = 'Kein Buch gefunden.';
+                this.errorMsg = 'Kein Kunde gefunden.';
                 break;
             case HttpStatus.TOO_MANY_REQUESTS:
                 this.errorMsg =

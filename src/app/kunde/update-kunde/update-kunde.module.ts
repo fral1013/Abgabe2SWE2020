@@ -20,13 +20,13 @@ import { ErrorMessageModule } from '../../shared/error-message.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { UpdateBuchComponent } from './update-buch.component';
+import { UpdateKundeComponent } from './update-kunde.component';
 import { UpdateSchlagwoerterModule } from './schlagwoerter/update-schlagwoerter.module';
 import { UpdateStammdatenModule } from './stammdaten/update-stammdaten.module';
 
 @NgModule({
-    declarations: [UpdateBuchComponent],
-    exports: [UpdateBuchComponent],
+    declarations: [UpdateKundeComponent],
+    exports: [UpdateKundeComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -36,4 +36,4 @@ import { UpdateStammdatenModule } from './stammdaten/update-stammdaten.module';
     ],
     providers: [Title],
 })
-export class UpdateBuchModule {}
+export class UpdateKundeModule {}
