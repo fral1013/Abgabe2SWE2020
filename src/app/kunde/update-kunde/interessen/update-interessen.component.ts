@@ -15,9 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Buch, BuchService } from '../../shared';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Kunde, KundeService } from '../../shared';
 import { HOME_PATH } from '../../../shared';
 import type { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -26,49 +26,54 @@ import { Router } from '@angular/router';
  * Komponente f&uuml;r das Tag <code>hs-schlagwoerter</code>
  */
 @Component({
-    selector: 'hs-update-schlagwoerter',
-    templateUrl: './update-schlagwoerter.component.html',
+    selector: 'hs-update-interessen',
+    templateUrl: './update-interessen.component.html',
 })
-export class UpdateSchlagwoerterComponent implements OnInit {
+export class UpdateInteressenComponent implements OnInit {
     // <hs-update-schlagwoerter [buch]="...">
     @Input()
-    readonly buch!: Buch;
+    readonly kunde!: Kunde;
 
     form!: FormGroup;
 
-    javascript!: FormControl;
+    lesen!: FormControl;
 
-    typescript!: FormControl;
+    reisen!: FormControl;
+
+    sport!: FormControl;
 
     constructor(
-        private readonly buchService: BuchService,
+        private readonly kundeService: KundeService,
         private readonly router: Router,
     ) {
-        console.log('UpdateSchlagwoerterComponent.constructor()');
+        console.log('UpdateInteresseComponent.constructor()');
     }
 
     /**
      * Das Formular als Gruppe von Controls initialisieren und mit den
-     * Schlagwoertern des zu &auml;ndernden Buchs vorbelegen.
+     * Schlagwoertern des zu &auml;ndernden Kunden vorbelegen.
      */
     ngOnInit() {
-        console.log('buch=', this.buch);
+        console.log('kunde=', this.kunde);
 
         // Definition und Vorbelegung der Eingabedaten (hier: Checkbox)
-        const hasJavaScript = this.buch.hasSchlagwort('JAVASCRIPT');
-        this.javascript = new FormControl(hasJavaScript);
-        const hasTypeScript = this.buch.hasSchlagwort('TYPESCRIPT');
-        this.typescript = new FormControl(hasTypeScript);
+        const hasLesen = this.kunde.hasInteresse('LESEN');
+        this.lesen = new FormControl(hasLesen);
+        const hasReisen = this.kunde.hasInteresse('REISEN');
+        this.reisen = new FormControl(hasReisen);
+        const hasSport = this.kunde.hasInteresse('SPORT');
+        this.sport = new FormControl(hasSport);
 
         this.form = new FormGroup({
             // siehe ngFormControl innerhalb von @Component({template: `...`})
-            javascript: this.javascript,
-            typescript: this.typescript,
+            lesen: this.lesen,
+            reisen: this.reisen,
+            sport: this.sport,
         });
     }
 
     /**
-     * Die aktuellen Schlagwoerter f&uuml;r das angezeigte Buch-Objekt
+     * Die aktuellen Schlagwoerter f&uuml;r das angezeigte Kunde-Objekt
      * zur&uuml;ckschreiben.
      * @return false, um das durch den Button-Klick ausgel&ouml;ste Ereignis
      *         zu konsumieren.
@@ -76,27 +81,28 @@ export class UpdateSchlagwoerterComponent implements OnInit {
     async onUpdate() {
         if (this.form.pristine) {
             console.log(
-                'UpdateSchlagwoerterComponent.onUpdate(): keine Aenderungen',
+                'UpdateInteressenComponent.onUpdate(): keine Aenderungen',
             );
             return;
         }
 
-        if (this.buch === undefined) {
+        if (this.kunde === undefined) {
             console.error(
-                'UpdateSchlagwoerterComponent.onUpdate(): buch === undefined',
+                'UpdateInteressenComponent.onUpdate(): kunde === undefined',
             );
             return;
         }
 
-        this.buch.updateSchlagwoerter(
-            this.javascript.value,
-            this.typescript.value,
+        this.kunde.updateInteressen(
+            this.lesen.value,
+            this.reisen.value,
+            this.sport.value,
         );
-        console.log('buch=', this.buch);
+        console.log('kunde=', this.kunde);
 
         const successFn = async () => {
             console.log(
-                `UpdateSchlagwoerterComponent.onUpdate(): successFn: path: ${HOME_PATH}`,
+                `UpdateInteressenComponent.onUpdate(): successFn: path: ${HOME_PATH}`,
             );
             await this.router.navigate([HOME_PATH]);
         };
@@ -106,13 +112,13 @@ export class UpdateSchlagwoerterComponent implements OnInit {
             errors: { [s: string]: unknown } | undefined,
         ) => void = (status, errors?) => {
             console.error(
-                `UpdateSchlagwoerterComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
+                `UpdateInteressenComponent.onUpdate(): errorFn(): status: ${status}, errors=`,
                 errors,
             );
             // TODO Fehlermeldung anzeigen
         };
 
-        await this.buchService.update(this.buch, successFn, errorFn);
+        await this.kundeService.update(this.kunde, successFn, errorFn);
 
         // damit das (Submit-) Ereignis konsumiert wird und nicht an
         // uebergeordnete Eltern-Komponenten propagiert wird bis zum
