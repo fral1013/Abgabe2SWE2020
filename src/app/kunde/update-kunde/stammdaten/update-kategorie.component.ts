@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,32 +18,31 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
-import type { Verlag } from '../../shared/kunde';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>
+ * Komponente f&uuml;r das Tag <code>hs-update-rating</code>
  */
 @Component({
-    selector: 'hs-update-verlag',
-    templateUrl: './update-verlag.component.html',
+    selector: 'hs-update-kategorie',
+    templateUrl: './update-kategorie.component.html',
 })
-export class UpdateVerlagComponent implements OnInit {
-    // <hs-update-verlag [form]="form" [currentValue]="...">
+export class UpdateKategorieComponent implements OnInit {
+    // <hs-update-rating [form]="form" [currentValue]="...">
     @Input()
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue: Verlag | undefined | '';
+    readonly currentValue: number | undefined;
 
-    verlag!: FormControl;
+    kategorie!: FormControl;
 
     ngOnInit() {
         console.log(
-            'UpdateVerlagComponent.ngOnInit(): currentValue=',
+            'UpdateKategorieComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.verlag = new FormControl(this.currentValue);
-        this.form.addControl('verlag', this.verlag);
+        this.kategorie = new FormControl(this.currentValue);
+        this.form.addControl('kategorie', this.kategorie);
     }
 }

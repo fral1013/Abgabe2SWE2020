@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,32 +17,33 @@
 
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import type { Familienstand } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-update-rating</code>
+ * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>
  */
 @Component({
-    selector: 'hs-update-rating',
-    templateUrl: './update-rating.component.html',
+    selector: 'hs-update-famlienstand',
+    templateUrl: './update-famlienstand.component.html',
 })
-export class UpdateRatingComponent implements OnInit {
-    // <hs-update-rating [form]="form" [currentValue]="...">
+export class UpdateFamilienstandComponent implements OnInit {
+    // <hs-update-familienstand [form]="form" [currentValue]="...">
     @Input()
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue: number | undefined;
+    readonly currentValue: Familienstand | undefined | '';
 
-    rating!: FormControl;
+    familienstand!: FormControl;
 
     ngOnInit() {
         console.log(
-            'UpdateRatingComponent.ngOnInit(): currentValue=',
+            'UpdateFamilienstandComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.rating = new FormControl(this.currentValue);
-        this.form.addControl('rating', this.rating);
+        this.familienstand = new FormControl(this.currentValue);
+        this.form.addControl('familienstand', this.familienstand);
     }
 }

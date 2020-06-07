@@ -18,11 +18,11 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { UpdateVerlagComponent } from './update-verlag.component';
+import { UpdateKategorieComponent } from './update-kategorie.component';
 
 @NgModule({
-    declarations: [UpdateVerlagComponent],
-    exports: [UpdateVerlagComponent],
+    declarations: [UpdateKategorieComponent],
+    exports: [UpdateKategorieComponent],
     imports: [ReactiveFormsModule],
 })
-export class UpdateVerlagModule {}
+export class UpdateKategorieModule {}
