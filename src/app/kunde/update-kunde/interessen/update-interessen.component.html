@@ -20,18 +20,26 @@
       <div class="checkbox">
         <input
           type="checkbox"
-          id="javascriptInput"
-          formControlName="javascript"
+          id="lesenInput"
+          formControlName="lesen"
         />
-        <label for="javascriptInput">JavaScript</label>
+        <label for="lesenInput">Lesen</label>
       </div>
       <div class="checkbox">
         <input
           type="checkbox"
-          id="typescriptInput"
-          formControlName="typescript"
+          id="reisenInput"
+          formControlName="reisen"
         />
-        <label for="typescriptInput">TypeScript</label>
+        <label for="reisenInput">Reisen</label>
+      </div>
+      <div class="checkbox">
+        <input
+          type="checkbox"
+          id="sportInput"
+          formControlName="sport"
+        />
+        <label for="reisenInput">Sport</label>
       </div>
     </div>
   </div>
@@ -45,7 +53,7 @@
         [disabled]="form.pristine || form.invalid"
       >
         <i class="material-icons">check</i>
-        <span class="ml-1">Schlagw&ouml;rter aktualisieren</span>
+        <span class="ml-1">Interessen aktualisieren</span>
       </button>
     </div>
   </div>

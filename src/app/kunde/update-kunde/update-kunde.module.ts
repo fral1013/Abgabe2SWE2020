@@ -20,8 +20,8 @@ import { ErrorMessageModule } from '../../shared/error-message.module';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { UpdateInteressenModule } from './interessen/update-interessen.module';
 import { UpdateKundeComponent } from './update-kunde.component';
-import { UpdateSchlagwoerterModule } from './schlagwoerter/update-schlagwoerter.module';
 import { UpdateStammdatenModule } from './stammdaten/update-stammdaten.module';
 
 @NgModule({
@@ -31,7 +31,7 @@ import { UpdateStammdatenModule } from './stammdaten/update-stammdaten.module';
         CommonModule,
         FormsModule,
         ErrorMessageModule,
-        UpdateSchlagwoerterModule,
+        UpdateInteressenModule,
         UpdateStammdatenModule,
     ],
     providers: [Title],

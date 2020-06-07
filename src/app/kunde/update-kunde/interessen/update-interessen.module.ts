@@ -18,11 +18,11 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { UpdateSchlagwoerterComponent } from './update-schlagwoerter.component';
+import { UpdateInteressenComponent } from './update-interessen.component';
 
 @NgModule({
-    declarations: [UpdateSchlagwoerterComponent],
-    exports: [UpdateSchlagwoerterComponent],
+    declarations: [UpdateInteressenComponent],
+    exports: [UpdateInteressenComponent],
     imports: [ReactiveFormsModule],
 })
-export class UpdateSchlagwoerterModule {}
+export class UpdateInteressenModule {}
