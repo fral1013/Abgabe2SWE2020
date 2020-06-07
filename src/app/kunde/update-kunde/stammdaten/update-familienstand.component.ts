@@ -17,33 +17,33 @@
 
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import type { Familienstand } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
-import type { Verlag } from '../../shared/kunde';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>
  */
 @Component({
-    selector: 'hs-update-verlag',
-    templateUrl: './update-verlag.component.html',
+    selector: 'hs-update-famlienstand',
+    templateUrl: './update-famlienstand.component.html',
 })
-export class UpdateVerlagComponent implements OnInit {
-    // <hs-update-verlag [form]="form" [currentValue]="...">
+export class UpdateFamilienstandComponent implements OnInit {
+    // <hs-update-familienstand [form]="form" [currentValue]="...">
     @Input()
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue: Verlag | undefined | '';
+    readonly currentValue: Familienstand | undefined | '';
 
-    verlag!: FormControl;
+    familienstand!: FormControl;
 
     ngOnInit() {
         console.log(
-            'UpdateVerlagComponent.ngOnInit(): currentValue=',
+            'UpdateFamilienstandComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.verlag = new FormControl(this.currentValue);
-        this.form.addControl('verlag', this.verlag);
+        this.familienstand = new FormControl(this.currentValue);
+        this.form.addControl('familienstand', this.familienstand);
     }
 }

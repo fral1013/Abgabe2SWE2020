@@ -18,10 +18,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateArtModule } from './update-art.module';
+import { UpdateFamilienstandModule } from './update-famlienstand.module';
 import { UpdateNachnameModule } from './update-nachname.module';
 import { UpdateRatingModule } from './update-rating.module';
 import { UpdateStammdatenComponent } from './update-stammdaten.component';
-import { UpdateVerlagModule } from './update-verlag.module';
 
 @NgModule({
     declarations: [UpdateStammdatenComponent],
@@ -31,7 +31,7 @@ import { UpdateVerlagModule } from './update-verlag.module';
         UpdateArtModule,
         UpdateRatingModule,
         UpdateNachnameModule,
-        UpdateVerlagModule,
+        UpdateFamilienstandModule,
     ],
 })
 export class UpdateStammdatenModule {}
