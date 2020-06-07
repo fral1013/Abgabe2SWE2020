@@ -8,7 +8,7 @@ import { fadeIn } from '../../../shared';
     animations: [fadeIn],
 })
 export class SucheGeschlechtComponent {
-    art: KundeGeschlecht | '' = '';
+    geschlecht: KundeGeschlecht | '' = '';
 
     constructor() {
         console.log('SucheGeschlechtComponent.constructor()');
