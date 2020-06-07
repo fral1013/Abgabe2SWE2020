@@ -14,8 +14,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<section *ngIf="buch">
-  <h4>Buch {{ buch._id }}:</h4>
+<section *ngIf="kunde">
+  <h4>Kunde {{ kunde._id }}:</h4>
 
   <ul class="nav nav-tabs" id="kundeUpdate">
     <li class="nav-item">
@@ -31,17 +31,17 @@
         Stammdaten
       </a>
     </li>
-    <li class="nav-item" *ngIf="buch.hasSchlagwoerter()">
+    <li class="nav-item" *ngIf="kunde.hasSchlagwoerter()">
       <a
         class="nav-link"
-        id="schlagwoerter-update-tab"
-        href="#schlagwoerter"
+        id="interessen-update-tab"
+        href="#interessen"
         data-toggle="tab"
         role="tab"
-        aria-controls="schlagwoerter"
+        aria-controls="interessen"
         aria-expanded="true"
       >
-        Schlagw&ouml;rter
+        Interessen
       </a>
     </li>
   </ul>
@@ -54,18 +54,18 @@
       aria-labelledby="stammdaten-tab"
     >
       <div class="mt-1">
-        <hs-update-stammdaten [buch]="buch"> </hs-update-stammdaten>
+        <hs-update-stammdaten [kunde]="kunde"> </hs-update-stammdaten>
       </div>
     </div>
     <div
       class="tab-pane fade"
-      id="schlagwoerter"
+      id="interessen"
       role="tabpanel"
-      aria-labelledby="schlagwoerter-tab"
-      *ngIf="buch.hasSchlagwoerter()"
+      aria-labelledby="interessen-tab"
+      *ngIf="kunde.hasInteressen()"
     >
       <div class="mt-1">
-        <hs-update-schlagwoerter [buch]="buch"> </hs-update-schlagwoerter>
+        <hs-update-interessen [kunde]="kunde"> </hs-update-interessen>
       </div>
     </div>
   </div>
