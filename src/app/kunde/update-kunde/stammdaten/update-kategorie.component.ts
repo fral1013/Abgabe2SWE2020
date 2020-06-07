@@ -23,10 +23,10 @@ import type { OnInit } from '@angular/core';
  * Komponente f&uuml;r das Tag <code>hs-update-rating</code>
  */
 @Component({
-    selector: 'hs-update-rating',
-    templateUrl: './update-rating.component.html',
+    selector: 'hs-update-kategorie',
+    templateUrl: './update-kategorie.component.html',
 })
-export class UpdateRatingComponent implements OnInit {
+export class UpdateKategorieComponent implements OnInit {
     // <hs-update-rating [form]="form" [currentValue]="...">
     @Input()
     readonly form!: FormGroup;
@@ -34,15 +34,15 @@ export class UpdateRatingComponent implements OnInit {
     @Input()
     readonly currentValue: number | undefined;
 
-    rating!: FormControl;
+    kategorie!: FormControl;
 
     ngOnInit() {
         console.log(
-            'UpdateRatingComponent.ngOnInit(): currentValue=',
+            'UpdateKategorieComponent.ngOnInit(): currentValue=',
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.rating = new FormControl(this.currentValue);
-        this.form.addControl('rating', this.rating);
+        this.kategorie = new FormControl(this.currentValue);
+        this.form.addControl('kategorie', this.kategorie);
     }
 }

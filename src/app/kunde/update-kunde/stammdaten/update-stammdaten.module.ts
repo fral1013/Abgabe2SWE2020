@@ -19,8 +19,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateArtModule } from './update-art.module';
 import { UpdateFamilienstandModule } from './update-famlienstand.module';
+import { UpdateKategorieModule } from './update-kategorie.module';
 import { UpdateNachnameModule } from './update-nachname.module';
-import { UpdateRatingModule } from './update-rating.module';
 import { UpdateStammdatenComponent } from './update-stammdaten.component';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { UpdateStammdatenComponent } from './update-stammdaten.component';
     imports: [
         ReactiveFormsModule,
         UpdateArtModule,
-        UpdateRatingModule,
+        UpdateKategorieModule,
         UpdateNachnameModule,
         UpdateFamilienstandModule,
     ],
