@@ -1,9 +1,9 @@
 import { Component, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
+import { SucheFamilienstandComponent } from './suche-familienstand.component';
 import { SucheGeschlechtComponent } from './suche-geschlecht.component';
 import { SucheInteressenComponent } from './suche-interessen.component';
 import { SucheNachnameComponent } from './suche-nachname.component';
-import { SucheFamilienstandComponent } from './suche-familienstand.component';
 import type { Suchkriterien } from '../../shared/types';
 import { fadeIn } from '../../../shared';
 
