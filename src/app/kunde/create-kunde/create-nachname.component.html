@@ -29,7 +29,10 @@
       [class.border-danger]="nachname.invalid && nachname.touched"
     />
 
-    <div *ngIf="nachname.invalid && nachname.touched" class="alert alert-danger">
+    <div
+      *ngIf="nachname.invalid && nachname.touched"
+      class="alert alert-danger"
+    >
       <i class="material-icons">error</i>
       <span class="ml-1" *ngIf="nachname.errors && nachname.errors.required">
         Ein Nachname muss eingegeben werden.

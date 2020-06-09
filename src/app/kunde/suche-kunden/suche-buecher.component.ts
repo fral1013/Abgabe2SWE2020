@@ -20,7 +20,6 @@ export class SucheKundenComponent implements OnInit {
         console.log('SucheKundenComponent.constructor()');
     }
 
-
     ngOnInit() {
         this.titleService.setTitle('Suche');
     }

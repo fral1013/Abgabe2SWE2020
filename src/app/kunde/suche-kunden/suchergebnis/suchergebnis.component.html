@@ -1,98 +1,97 @@
 <section class="mt-2" aria-label="Suchergebnis">
-    <hs-waiting *ngIf="waiting; else suchergebnis"></hs-waiting>
-  
-    <ng-template #suchergebnis>
-      <div
-        class="card"
-        aria-label="Gefundene Kunden"
-        *ngIf="kunden.length; else showErrorMsg"
-      >
-        <div class="card-header">
-          <i class="material-icons">folder_open</i>
-          <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
-        </div>
-        <div class="card-body">
-          <table
-            class="table table-striped table-hover table-responsive"
-            [@easeIn]="'in'"
-          >
-            <thead class="thead-default">
-              <tr>
-                <th>Nr.</th>
-                <th>ID</th>
-                <th>Nachname</th>
-                <th>Familienstand</th>
-                <th>Interessen</th>
-                <th>
-                  <span class="sr-only">Spalte f&uuml;r Details</span>
-                </th>
-                <th *ngIf="isAdmin">
-                  <span class="sr-only">Spalte f&uuml;r Entfernen</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let b of kunden; index as i" [@easeOut]="'in'">
-                <td (click)="onClick(b)">{{ i + 1 }}</td>
-                <td (click)="onClick(b)">{{ b._id }}</td>
-                <td (click)="onClick(b)">{{ b.titel }}</td>
-                <td>
-                  <span [ngSwitch]="b.verlag">
-                    <span *ngSwitchCase="'FOO_VERLAG'">Foo Verlag</span>
-                    <span *ngSwitchCase="'BAR_VERLAG'">Bar Verlag</span>
-                    <span *ngSwitchDefault>unbekannt</span>
-                  </span>
-                </td>
-                <td (click)="onClick(b)">
-                  <span *ngFor="let sw of b.schlagwoerter">
-                    <span [ngSwitch]="sw">
-                      <span *ngSwitchCase="'JAVASCRIPT'"> JavaScript<br /> </span>
-                      <span *ngSwitchCase="'TYPESCRIPT'"> TypeScript </span>
-                    </span>
-                  </span>
-                </td>
-                <td>
+  <hs-waiting *ngIf="waiting; else suchergebnis"></hs-waiting>
 
-                  <a [routerLink]="['..', b._id]" title="Details anzeigen">
-                    <i class="material-icons">search</i>
-                  </a>
-                </td>
-                <td *ngIf="isAdmin">
-                  <span (click)="onRemove(b)" title="Entfernen">
-                    <i class="material-icons">delete</i>
+  <ng-template #suchergebnis>
+    <div
+      class="card"
+      aria-label="Gefundene Kunden"
+      *ngIf="kunden.length; else showErrorMsg"
+    >
+      <div class="card-header">
+        <i class="material-icons">folder_open</i>
+        <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
+      </div>
+      <div class="card-body">
+        <table
+          class="table table-striped table-hover table-responsive"
+          [@easeIn]="'in'"
+        >
+          <thead class="thead-default">
+            <tr>
+              <th>Nr.</th>
+              <th>ID</th>
+              <th>Nachname</th>
+              <th>Familienstand</th>
+              <th>Interessen</th>
+              <th>
+                <span class="sr-only">Spalte f&uuml;r Details</span>
+              </th>
+              <th *ngIf="isAdmin">
+                <span class="sr-only">Spalte f&uuml;r Entfernen</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let b of kunden; index as i" [@easeOut]="'in'">
+              <td (click)="onClick(b)">{{ i + 1 }}</td>
+              <td (click)="onClick(b)">{{ b._id }}</td>
+              <td (click)="onClick(b)">{{ b.titel }}</td>
+              <td>
+                <span [ngSwitch]="b.verlag">
+                  <span *ngSwitchCase="'FOO_VERLAG'">Foo Verlag</span>
+                  <span *ngSwitchCase="'BAR_VERLAG'">Bar Verlag</span>
+                  <span *ngSwitchDefault>unbekannt</span>
+                </span>
+              </td>
+              <td (click)="onClick(b)">
+                <span *ngFor="let sw of b.schlagwoerter">
+                  <span [ngSwitch]="sw">
+                    <span *ngSwitchCase="'JAVASCRIPT'"> JavaScript<br /> </span>
+                    <span *ngSwitchCase="'TYPESCRIPT'"> TypeScript </span>
                   </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                </span>
+              </td>
+              <td>
+                <a [routerLink]="['..', b._id]" title="Details anzeigen">
+                  <i class="material-icons">search</i>
+                </a>
+              </td>
+              <td *ngIf="isAdmin">
+                <span (click)="onRemove(b)" title="Entfernen">
+                  <i class="material-icons">delete</i>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer">
+        <div>
+          <i class="material-icons">info</i>
+          <span class="ml-1" [ngPlural]="kunden.length">
+            <!-- zu vergleichender Ausdruck -->
+            <ng-template ngPluralCase="=0">
+              Es exisitieren keine Kunden
+            </ng-template>
+            <ng-template ngPluralCase="=1"> Es gibt Kunden </ng-template>
+            <ng-template ngPluralCase="other">
+              Es gibt {{ kunden.length }} B&uuml;cher
+            </ng-template>
+          </span>
         </div>
-        <div class="card-footer">
-          <div>
-            <i class="material-icons">info</i>
-            <span class="ml-1" [ngPlural]="kunden.length">
-              <!-- zu vergleichender Ausdruck -->
-              <ng-template ngPluralCase="=0"> Es exisitieren keine Kunden </ng-template>
-              <ng-template ngPluralCase="=1"> Es gibt Kunden </ng-template>
-              <ng-template ngPluralCase="other">
-                Es gibt {{ kunden.length }} B&uuml;cher
-              </ng-template>
-            </span>
-          </div>
-  
-          <div>
-            <i class="material-icons">info</i>
-            <span class="ml-1">
-              Zur Anzeige der JSON-Datens&auml;tze in suchergebnis.html am
-              Dateiende den Kommentar beim Tag &lt;pre&gt; entfernen
-            </span>
-          </div>
+
+        <div>
+          <i class="material-icons">info</i>
+          <span class="ml-1">
+            Zur Anzeige der JSON-Datens&auml;tze in suchergebnis.html am
+            Dateiende den Kommentar beim Tag &lt;pre&gt; entfernen
+          </span>
         </div>
       </div>
-  
+    </div>
 
-      <ng-template #showErrorMsg>
-        <hs-error-message [text]="errorMsg"></hs-error-message>
-      </ng-template>
+    <ng-template #showErrorMsg>
+      <hs-error-message [text]="errorMsg"></hs-error-message>
     </ng-template>
-  </section>
-  
+  </ng-template>
+</section>

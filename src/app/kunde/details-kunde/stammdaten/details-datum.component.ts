@@ -30,6 +30,8 @@ export class DetailsGeburtsdatumComponent implements OnInit {
     readonly formatted!: string;
 
     ngOnInit() {
-        console.log(`DetailsGeburtsdatumComponent: formatted=${this.formatted}`);
+        console.log(
+            `DetailsGeburtsdatumComponent: formatted=${this.formatted}`,
+        );
     }
 }

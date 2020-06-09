@@ -26,7 +26,10 @@ export class UpdateGeschlechtComponent implements OnInit {
             this.currentValue,
         );
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.geschlecht = new FormControl(this.currentValue, Validators.required);
+        this.geschlecht = new FormControl(
+            this.currentValue,
+            Validators.required,
+        );
         this.form.addControl('geschlecht', this.geschlecht);
     }
 }

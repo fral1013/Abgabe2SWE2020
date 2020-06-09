@@ -65,7 +65,7 @@ export class SuchformularComponent {
             nachname,
             familienstand,
             geschlecht,
-            interessen: { lesen, reisen , sport },
+            interessen: { lesen, reisen, sport },
         });
 
         return false;

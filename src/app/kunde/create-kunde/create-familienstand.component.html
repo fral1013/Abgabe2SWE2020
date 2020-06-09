@@ -31,7 +31,10 @@
       <option value="VERWITWET_FAMILIENSTAND">Verwitwet</option>
     </select>
 
-    <div *ngIf="familienstand.invalid && familienstand.touched" class="alert alert-danger">
+    <div
+      *ngIf="familienstand.invalid && familienstand.touched"
+      class="alert alert-danger"
+    >
       <div *ngIf="familienstand.errors && familienstand.errors.required">
         <i class="material-icons">error</i>
         <span class="ml-1"> Ein Familienstand ist erforderlich. </span>
