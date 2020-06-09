@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UpdateFamilienstandModule } from './update-famlienstand.module';
+import { UpdateFamilienstandModule } from './update-familienstand.module';
 import { UpdateGeschlechtModule } from './update-geschlecht.module';
 import { UpdateKategorieModule } from './update-kategorie.module';
 import { UpdateNachnameModule } from './update-nachname.module';

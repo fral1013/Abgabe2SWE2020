@@ -24,8 +24,8 @@ import type { OnInit } from '@angular/core';
  * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>
  */
 @Component({
-    selector: 'hs-update-famlienstand',
-    templateUrl: './update-famlienstand.component.html',
+    selector: 'hs-update-familienstand',
+    templateUrl: './update-familienstand.component.html',
 })
 export class UpdateFamilienstandComponent implements OnInit {
     // <hs-update-familienstand [form]="form" [currentValue]="...">

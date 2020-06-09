@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { SucheTitelComponent } from './suche-titel.component';
+import { Component, Input } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import type { Familienstand } from '../../shared/kunde';
 
-@NgModule({
-    declarations: [SucheTitelComponent],
-    exports: [SucheTitelComponent],
-    imports: [FormsModule],
+/**
+ * Komponente f&uuml;r das Tag <code>hs-details-verlag</code>
+ */
+@Component({
+    selector: 'hs-details-familienstand',
+    templateUrl: './details-familienstand.component.html',
 })
-export class SucheTitelModule {}
+export class DetailsVerlagComponent implements OnInit {
+    @Input()
+    readonly verlag: Familienstand | undefined | '';
+
+    ngOnInit() {
+        console.log(`DetailsVerlagComponent.verlag=${this.familienstand}`);
+    }
+}
