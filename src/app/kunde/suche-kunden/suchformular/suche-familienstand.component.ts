@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import type { Verlag } from '../../shared/kunde';
+import type { Familienstand } from '../../shared/kunde';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-suche-familienstand</code>
