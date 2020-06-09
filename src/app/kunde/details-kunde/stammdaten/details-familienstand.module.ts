@@ -16,12 +16,12 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { DetailsVerlagComponent } from './details-verlag.component';
+import { DetailsFamilienstandComponent } from './details-familienstand.component';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    declarations: [DetailsVerlagComponent],
-    exports: [DetailsVerlagComponent],
+    declarations: [DetailsFamilienstandComponent],
+    exports: [DetailsFamilienstandComponent],
     imports: [CommonModule],
 })
-export class DetailsVerlagModule {}
+export class DetailsFamilienstandModule {}

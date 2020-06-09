@@ -20,17 +20,17 @@ import type { OnInit } from '@angular/core';
 import type { Familienstand } from '../../shared/kunde';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-details-verlag</code>
+ * Komponente f&uuml;r das Tag <code>hs-details-familienstand</code>
  */
 @Component({
     selector: 'hs-details-familienstand',
     templateUrl: './details-familienstand.component.html',
 })
-export class DetailsVerlagComponent implements OnInit {
+export class DetailsFamilienstandComponent implements OnInit {
     @Input()
-    readonly verlag: Familienstand | undefined | '';
+    readonly familienstand: Familienstand | undefined | '';
 
     ngOnInit() {
-        console.log(`DetailsVerlagComponent.verlag=${this.familienstand}`);
+        console.log(`DetailsFamilienstandComponent.familienstand=${this.familienstand}`);
     }
 }

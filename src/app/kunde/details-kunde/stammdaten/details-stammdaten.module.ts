@@ -17,7 +17,7 @@
 
 import { CommonModule } from '@angular/common';
 import { DetailsGeschlechtModule } from './details-geschlecht.module';
-import { DetailsBewertungModule } from './details-bewertung.module';
+import { DetailsKategorieModule } from './details-kategorie.module';
 import { DetailsGeburtsdatumModule } from './details-geburtsdatum.module';
 import { DetailsNewsletterModule } from './details-newsletter.module';
 import { DetailsStammdatenComponent } from './details-stammdaten.component';
@@ -31,7 +31,7 @@ import { NgModule } from '@angular/core';
     imports: [
         CommonModule,
         DetailsGeschlechtModule,
-        DetailsBewertungModule,
+        DetailsKategorieModule,
         DetailsGeburtsdatumModule,
         DetailsNewsletterModule,
         DetailsNachnameModule,

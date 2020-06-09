@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+ * Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { CommonModule } from '@angular/common';
-import { DetailsBewertungComponent } from './details-bewertung.component';
-import { NgModule } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { OnInit } from '@angular/core';
 
-@NgModule({
-    declarations: [DetailsBewertungComponent],
-    exports: [DetailsBewertungComponent],
-    imports: [CommonModule],
+/**
+ * Komponente f&uuml;r das Tag <code>hs-details-kategorie</code>
+ */
+@Component({
+    selector: 'hs-details-kategorie',
+    templateUrl: './details-kategorie.component.html',
 })
-export class DetailsBewertungModule {}
+export class DetailsKategorieComponent implements OnInit {
+    @Input()
+    readonly kategorieArray: Array<boolean> | undefined;
+
+    ngOnInit() {
+        console.log('DetailsKategorieComponent.kategorieArray=', this.kategorieArray);
+    }
+}
