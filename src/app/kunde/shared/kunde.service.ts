@@ -481,6 +481,6 @@ export interface Suchkriterien {
     nachname: string;
     familienstand: Familienstand | '';
     geschlecht: Geschlecht | '';
-    interessen: { javascript: boolean; typescript: boolean };
+    interessen: { lesen: boolean; typescript: boolean };
 }
 /* eslint-enable max-lines,no-null/no-null */

@@ -1,6 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { SucheArtComponent } from './suche-geschlecht.component';
+import { SucheGeschlechtComponent } from './suche-geschlecht.component';
 
 @NgModule({
     declarations: [SucheGeschlechtComponent],

@@ -1,5 +1,5 @@
-import type { KundeGeschlecht } from '../../shared/kunde';
 import { Component } from '@angular/core';
+import type { Geschlecht } from '../../shared/kunde';
 import { fadeIn } from '../../../shared';
 
 @Component({
@@ -8,7 +8,7 @@ import { fadeIn } from '../../../shared';
     animations: [fadeIn],
 })
 export class SucheGeschlechtComponent {
-    geschlecht: KundeGeschlecht | '' = '';
+    geschlecht: Geschlecht | '' = '';
 
     constructor() {
         console.log('SucheGeschlechtComponent.constructor()');

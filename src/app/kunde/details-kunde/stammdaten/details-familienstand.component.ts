@@ -31,6 +31,8 @@ export class DetailsFamilienstandComponent implements OnInit {
     readonly familienstand: Familienstand | undefined | '';
 
     ngOnInit() {
-        console.log(`DetailsFamilienstandComponent.familienstand=${this.familienstand}`);
+        console.log(
+            `DetailsFamilienstandComponent.familienstand=${this.familienstand}`,
+        );
     }
 }

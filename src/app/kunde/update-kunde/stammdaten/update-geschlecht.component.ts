@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import type { KundeGeschlecht } from '../../shared/kunde';
+import type { Geschlecht } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
@@ -16,7 +16,7 @@ export class UpdateGeschlechtComponent implements OnInit {
     readonly form!: FormGroup;
 
     @Input()
-    readonly currentValue!: KundeGeschlecht;
+    readonly currentValue!: Geschlecht;
 
     geschlecht!: FormControl;
 

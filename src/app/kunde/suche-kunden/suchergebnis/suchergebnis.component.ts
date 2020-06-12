@@ -133,7 +133,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
             nachname: '',
             familienstand: '',
             geschlecht: '',
-            interessen: { lesen: false, reisen: false },
+            interessen: { lesen: false, reisen: false, sport: false },
         };
 
         this.kunden = [];

@@ -30,6 +30,9 @@ export class DetailsKategorieComponent implements OnInit {
     readonly kategorieArray: Array<boolean> | undefined;
 
     ngOnInit() {
-        console.log('DetailsKategorieComponent.kategorieArray=', this.kategorieArray);
+        console.log(
+            'DetailsKategorieComponent.kategorieArray=',
+            this.kategorieArray,
+        );
     }
 }
