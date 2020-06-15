@@ -20,8 +20,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-verlag&gt;, um das Erfassungsformular
- * f&uuml;r ein neues Buch zu realisieren.
+ * Komponente mit dem Tag &lt;hs-create-familienstand
  */
 @Component({
     selector: 'hs-create-familienstand',

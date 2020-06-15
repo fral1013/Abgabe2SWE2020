@@ -21,7 +21,7 @@ import type { Familienstand } from '../../shared/kunde';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-update-verlag</code>
+ * Komponente f&uuml;r das Tag <code>hs-update-familienstand</code>
  */
 @Component({
     selector: 'hs-update-familienstand',

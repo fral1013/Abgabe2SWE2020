@@ -1,27 +1,12 @@
-<!--
-    Copyright (C) 2015 - present Juergen Zimmermann, Hochschule Karlsruhe
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
--->
 <form [formGroup]="form" role="form">
-  <hs-update-titel [form]="form" [currentValue]="buch.titel"> </hs-update-titel>
-  <hs-update-art [form]="form" [currentValue]="buch.art"> </hs-update-art>
-  <hs-update-verlag [form]="form" [currentValue]="buch.verlag">
-  </hs-update-verlag>
-  <hs-update-rating [form]="form" [currentValue]="buch.rating">
-  </hs-update-rating>
-  <hs-update-isbn [form]="form" [currentValue]="buch.isbn"> </hs-update-isbn>
+  <hs-update-nachname [form]="form" [currentValue]="kunde.nachname">
+  </hs-update-nachname>
+  <hs-update-geschlecht [form]="form" [currentValue]="kunde.geschlecht">
+  </hs-update-geschlecht>
+  <hs-update-familienstand [form]="form" [currentValue]="kunde.familienstand">
+  </hs-update-familienstand>
+  <hs-update-kategorie [form]="form" [currentValue]="kunde.kategorie">
+  </hs-update-kategorie>
 
   <div class="form-group row">
     <div class="col offset-2">
