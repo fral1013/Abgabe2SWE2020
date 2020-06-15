@@ -1,5 +1,5 @@
-import { Kunde, KundeService } from '../../shared';
 import { Component, Input } from '@angular/core';
+import { Kunde, KundeService } from '../../shared';
 import { FormGroup } from '@angular/forms';
 import { HOME_PATH } from '../../../shared';
 import type { OnInit } from '@angular/core';
