@@ -71,6 +71,7 @@ export const ISBN_REGEX = /\d{3}-\d-\d{5}-\d{3}-\d|\d-\d{5}-\d{3}-\d|\d-\d{4}-\d
 export interface KundeShared {
     _id?: string;
     nachname: string;
+    email: string;
     familienstand?: Familienstand | '';
     geschlecht: Geschlecht;
     geburtsdatum?: string;
@@ -144,6 +145,7 @@ export class Kunde {
     private constructor(
         public _id: string | undefined,
         public nachname: string,
+        public email: string,
         public kategorie: number | undefined,
         public geschlecht: Geschlecht,
         public familienstand: Familienstand | undefined | '',
@@ -188,6 +190,7 @@ export class Kunde {
         const kunde = new Kunde(
             id,
             kundeServer.nachname,
+            kundeServer.email,
             kundeServer.kategorie,
             kundeServer.geschlecht,
             kundeServer.familienstand,
@@ -221,6 +224,7 @@ export class Kunde {
         const kunde = new Kunde(
             kundeForm._id,
             kundeForm.nachname,
+            kundeForm.email,
             Number(kundeForm.kategorie),
             kundeForm.geschlecht,
             kundeForm.familienstand,
@@ -370,6 +374,7 @@ export class Kunde {
         return {
             _id: this._id,
             nachname: this.nachname,
+            email: this.email,
             kategorie: this.kategorie,
             geschlecht: this.geschlecht,
             familienstand: this.familienstand,
