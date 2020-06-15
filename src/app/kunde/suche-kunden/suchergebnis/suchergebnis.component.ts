@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
 import { HttpStatus, easeIn, easeOut } from '../../../shared';
 import type { OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../../auth/auth.service';
-import { Kunde, KundeService, FindError, RemoveError } from '../../shared';
+import { FindError, Kunde, KundeService, RemoveError } from '../../shared';
 import { NgLocalization } from '@angular/common';
 import type { Suchkriterien } from '../../shared/types';
 
@@ -32,7 +32,9 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
     waiting = false;
 
     kunden: Array<Kunde> = [];
+
     errorMsg: string | undefined;
+
     isAdmin!: boolean;
 
     // Empfehlung: Konstruktor nur fuer DI
@@ -54,6 +56,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         this.waiting = true;
 
         try {
+            // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
             this.kunden = await this.kundeService.find(this.suchkriterien);
         } catch (err) {
             this.handleFindError(err);
@@ -149,6 +152,6 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
 
 export class AnzahlLocalization extends NgLocalization {
     getPluralCategory(count: number) {
-        return count === 1 ? 'single' : 'multi'; // eslint-disable-line no-magic-numbers
+        return count === 1 ? 'single' : 'multi';
     }
 }
