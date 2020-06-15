@@ -193,7 +193,7 @@ export class KundeService {
      */
     async save(kunde: Kunde) {
         console.log('KundeService.save(): kunde=', kunde);
-        kunde.datum = new Date();
+        kunde.geburtsdatum = new Date();
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

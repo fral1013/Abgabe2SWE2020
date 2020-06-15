@@ -18,6 +18,9 @@
  */
 
 // eslint-disable-next-line max-classes-per-file
+const MIN_KATEGORIE = 0;
+const MAX_KATEGORIE = 9;
+
 export enum Interesse {
     SPORT = 'S',
     LESEN = 'L',
@@ -57,32 +60,25 @@ export class Umsatz {
         this.waehrung = weahrung;
     }
 }
-// eslint-disable-next-line @typescript-eslint/no-type-alias
-type UUID = string;
+
+// eslint-disable-next-line max-len
+export const ISBN_REGEX = /\d{3}-\d-\d{5}-\d{3}-\d|\d-\d{5}-\d{3}-\d|\d-\d{4}-\d{4}-\d|\d{3}-\d{10}/u;
 
 /**
  * Gemeinsame Datenfelder unabh&auml;ngig, ob die Kundendaten von einem Server
  * (z.B. RESTful Web Service) oder von einem Formular kommen.
  */
 export interface KundeShared {
-    _id?: UUID;
-    nachname?: string;
-    email?: string;
-    kategorie?: number;
+    _id?: string;
+    nachname: string;
+    familienstand?: Familienstand | '';
+    geschlecht: Geschlecht;
+    geburtsdatum?: string;
     newsletter?: boolean;
-    geburtsdatum?: Date;
-    umsatz?: Umsatz;
-    homepage?: string;
-    geschlecht?: Geschlecht;
-    familienstand?: Familienstand;
-    // Dürfen die Interessen da drin stehen ?
-    interessen?: Array<string>;
-    adresse?: Adresse;
     version?: number;
 }
 
 interface Link {
-    rel: string;
     href: string;
 }
 
@@ -96,8 +92,15 @@ interface Link {
  * </ul>
  */
 export interface KundeServer extends KundeShared {
+    kategorie?: number;
     interessen?: Array<string>;
-    links?: Array<Link>;
+    _links?: {
+        self: Link;
+        list?: Link;
+        add?: Link;
+        update?: Link;
+        remove?: Link;
+    };
 }
 
 /**
@@ -108,9 +111,10 @@ export interface KundeServer extends KundeShared {
  * </ul>
  */
 export interface KundeForm extends KundeShared {
-    sport?: boolean;
-    lesen?: boolean;
+    kategorie: string;
     reisen?: boolean;
+    lesen?: boolean;
+    sport?: boolean;
 }
 
 /**
@@ -118,27 +122,34 @@ export interface KundeForm extends KundeShared {
  * Functions fuer Abfragen und Aenderungen.
  */
 export class Kunde {
-    // private static readonly SPACE = 2;
+    private static readonly SPACE = 2;
 
-    datum: Date | undefined;
+    /* eslint-disable @typescript-eslint/no-invalid-this */
+    kategorieArray: Array<boolean> =
+        this.kategorie === undefined
+            ? new Array(MAX_KATEGORIE - MIN_KATEGORIE).fill(false)
+            : new Array(this.kategorie - MIN_KATEGORIE)
+                  .fill(true)
+                  .concat(
+                      new Array(MAX_KATEGORIE - this.kategorie).fill(false),
+                  );
+    /* eslint-enable @typescript-eslint/no-invalid-this */
 
-    // interessen: Array<string>;
+    geburtsdatum: Date | undefined;
+
+    interessen: Array<string>;
 
     // wird aufgerufen von fromServer() oder von fromForm()
     // eslint-disable-next-line max-params
     private constructor(
-        public _id: UUID | undefined,
-        public nachname: string | undefined,
-        public email: string | undefined,
+        public _id: string | undefined,
+        public nachname: string,
         public kategorie: number | undefined,
+        public geschlecht: Geschlecht,
+        public familienstand: Familienstand | undefined | '',
+        geburtsdatum: string | undefined,
         public newsletter: boolean | undefined,
-        public geburtsdatum: Date | undefined,
-        public umsatz: Umsatz | undefined,
-        public homepage: string | undefined,
-        public geschlecht: Geschlecht | undefined,
-        public familienstand: Familienstand | undefined,
-        public interessen: Array<string> | undefined,
-        public adresse: Adresse | undefined,
+        interessen: Array<string> | undefined,
         public version: number | undefined,
     ) {
         // TODO Parsing, ob der Datum-String valide ist
@@ -156,38 +167,33 @@ export class Kunde {
      */
     static fromServer(kundeServer: KundeServer, etag?: string) {
         let selfLink: string | undefined;
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-        const selfLinkJson = kundeServer.links && kundeServer.links[0];
-        if (selfLinkJson !== undefined && selfLinkJson.rel === 'self') {
-            selfLink = selfLinkJson.href;
+        const { _links } = kundeServer;
+        if (_links !== undefined) {
+            const { self } = _links;
+            selfLink = self.href;
         }
-        let id: UUID | undefined;
+        let id: string | undefined;
         if (selfLink !== undefined) {
             const lastSlash = selfLink.lastIndexOf('/');
-            id = selfLink.slice(Math.max(0, lastSlash + 1));
+            id = selfLink.slice(lastSlash + 1);
         }
 
         let version: number | undefined;
         if (etag !== undefined) {
             // Anfuehrungszeichen am Anfang und am Ende entfernen
-            // eslint-disable-next-line unicorn/prefer-string-slice
-            const versionStr = etag.substring(1, etag.length - 1);
+            const versionStr = etag.slice(1, -1);
             version = Number.parseInt(versionStr, 10);
         }
 
         const kunde = new Kunde(
             id,
             kundeServer.nachname,
-            kundeServer.email,
             kundeServer.kategorie,
-            kundeServer.newsletter,
-            kundeServer.geburtsdatum,
-            kundeServer.umsatz,
-            kundeServer.homepage,
             kundeServer.geschlecht,
             kundeServer.familienstand,
+            kundeServer.geburtsdatum,
+            kundeServer.newsletter,
             kundeServer.interessen,
-            kundeServer.adresse,
             version,
         );
         console.log('Kunde.fromServer(): kunde=', kunde);
@@ -200,34 +206,27 @@ export class Kunde {
      * @return Das initialisierte Kunde-Objekt
      */
     static fromForm(kundeForm: KundeForm) {
+        console.log('Kunde.fromForm(): kundeForm=', kundeForm);
         const interessen: Array<string> = [];
-        if (kundeForm.lesen === true) {
-            interessen.push('L');
-        }
         if (kundeForm.reisen === true) {
-            interessen.push('R');
+            interessen.push('REISEN');
+        }
+        if (kundeForm.lesen === true) {
+            interessen.push('LESEN');
         }
         if (kundeForm.sport === true) {
-            interessen.push('S');
+            interessen.push('SPORT');
         }
-
-        const testAdresse = new Adresse('12345', 'Mosbach');
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        const testUmsatz = new Umsatz(45, 'EUR');
 
         const kunde = new Kunde(
             kundeForm._id,
             kundeForm.nachname,
-            kundeForm.email,
-            kundeForm.kategorie,
-            kundeForm.newsletter,
-            kundeForm.geburtsdatum,
-            testUmsatz,
-            kundeForm.homepage,
+            Number(kundeForm.kategorie),
             kundeForm.geschlecht,
             kundeForm.familienstand,
+            kundeForm.geburtsdatum,
+            kundeForm.newsletter,
             interessen,
-            testAdresse,
             kundeForm.version,
         );
         console.log('Kunde.fromForm(): kunde=', kunde);
@@ -236,21 +235,23 @@ export class Kunde {
 
     // Property in TypeScript wie in C#
     // https://www.typescriptlang.org/docs/handbook/classes.html#accessors
-    get datumFormatted() {
+    get geburtsdatumFormatted() {
         // z.B. 7. Mai 2020
         const formatter = new Intl.DateTimeFormat('de', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
         });
-        return this.datum === undefined ? '' : formatter.format(this.datum);
+        return this.geburtsdatum === undefined
+            ? ''
+            : formatter.format(this.geburtsdatum);
     }
 
     /**
-     * Abfrage, ob im Kundetitel der angegebene Teilstring enthalten ist. Dabei
+     * Abfrage, ob im Kundennachnamen der angegebene Teilstring enthalten ist. Dabei
      * wird nicht auf Gross-/Kleinschreibung geachtet.
      * @param nachname Zu &uuml;berpr&uuml;fender Teilstring
-     * @return true, falls der Teilstring im Kundetitel enthalten ist. Sonst
+     * @return true, falls der Teilstring im Kundennachnamen enthalten ist. Sonst
      *         false.
      */
     containsNachname(nachname: string) {
@@ -260,46 +261,74 @@ export class Kunde {
     }
 
     /**
-     * Aktualisierung der Stammdaten des Kunden-Objekts.
-     * @param nachname
-     * @param familienstand
-     * @param email
-     * @param homepage
-     * @param kategorie
-     * @param newsletter
+     * Die Bewertung ("kategorie") des Kunden um 1 erh&ouml;hen
+     */
+    rateUp() {
+        if (this.kategorie !== undefined && this.kategorie < MAX_KATEGORIE) {
+            this.kategorie++;
+        }
+    }
+
+    /**
+     * Die Bewertung ("kategorie") des Kunden um 1 erniedrigen
+     */
+    rateDown() {
+        if (this.kategorie !== undefined && this.kategorie > MIN_KATEGORIE) {
+            this.kategorie--;
+        }
+    }
+
+    /**
+     * Abfrage, ob das Kunde dem angegebenen Familienstand zugeordnet ist.
+     * @param familienstand der Name des Familienstands
+     * @return true, falls das Kunde dem Familienstand zugeordnet ist. Sonst false.
+     */
+    hasFamilienstand(familienstand: string) {
+        return this.familienstand === familienstand;
+    }
+
+    /**
+     * Aktualisierung der Stammdaten des Kunde-Objekts.
+     * @param nachname Der neue Nachname
+     * @param kategorie Die neue Bewertung
+     * @param geschlecht Die neue Geschlecht (DRUCKAUSGABE oder KINDLE)
+     * @param familienstand Der neue Familienstand
      */
     // eslint-disable-next-line max-params
     updateStammdaten(
         nachname: string,
-        familienstand: Familienstand,
-        email: string,
-        homepage: string,
+        geschlecht: Geschlecht,
+        familienstand: Familienstand | undefined | '',
         kategorie: number | undefined,
-        newsletter: boolean,
+        geburtsdatum: Date | undefined,
     ) {
         this.nachname = nachname;
+        this.geschlecht = geschlecht;
         this.familienstand = familienstand;
-        this.email = email;
-        this.homepage = homepage;
         this.kategorie = kategorie;
-        this.newsletter = newsletter;
+        this.kategorieArray =
+            kategorie === undefined
+                ? new Array(MAX_KATEGORIE - MIN_KATEGORIE).fill(false)
+                : new Array(kategorie - MIN_KATEGORIE).fill(true);
+        this.geburtsdatum =
+            geburtsdatum === undefined ? new Date() : geburtsdatum;
     }
 
     /**
-     * Abfrage, ob es zum Kunde auch Interessen gibt.
-     * @return true, falls es mindestens eine Interesse gibt. Sonst false.
+     * Abfrage, ob es zum Kunde auch Schlagw&ouml;rter gibt.
+     * @return true, falls es mindestens ein Interesse gibt. Sonst false.
      */
     hasInteressen() {
-        if (this.interessen === undefined || this.interessen === undefined) {
+        if (this.interessen === undefined) {
             return false;
         }
         return this.interessen.length !== 0;
     }
 
     /**
-     * Abfrage, ob es zum Kunde die angegebene Interesse gibt.
-     * @param interesse die zu überprüf. Interesse
-     * @return true, falls es die Interesse gibt. Sonst false.
+     * Abfrage, ob es zum Kunde das angegebene Interesse gibt.
+     * @param interesse das zu &uuml;berpr&uuml;fende Interesse
+     * @return true, falls es das Interesse gibt. Sonst false.
      */
     hasInteresse(interesse: string) {
         if (this.interessen === undefined) {
@@ -309,62 +338,57 @@ export class Kunde {
     }
 
     /**
-     * Aktualisierung der Interessen des Kunde-Objekts.
-     * @param lesen ist das Schlagwort LESEN gesetzt
-     * @param reisen ist das Schlagwort REISEN gesetzt
-     * @param sport ist das Schlagwort SPORT gesetzt
+     * Aktualisierung der Schlagw&ouml;rter des Kunde-Objekts.
+     * @param reisen ist das Interesse REISEN gesetzt
+     * @param lesen ist das Interesse LESEN gesetzt
+     * @param sport ist das Interesse SPORT gesetzt
      */
-    // updateInteressen
-
-    /**
-     * Konvertierung des Kundeobjektes in ein JSON-Objekt für den RESTful
-     * Web Service.
-     * @return Das JSON-Objekt für den RESTful Web Service
-     */
-    toJSON(): KundeServer {
-        // const datum =
-        //     this.datum === undefined
-        //         ? undefined
-        //         : this.datum.format('YYYY-MM-DD')
-        return {
-            _id: this._id,
-            nachname: this.nachname,
-            email: this.email,
-            kategorie: this.kategorie,
-            newsletter: this.newsletter,
-            geburtsdatum: this.geburtsdatum,
-            umsatz: this.umsatz,
-            homepage: this.homepage,
-            geschlecht: this.geschlecht,
-            familienstand: this.familienstand,
-            interessen: this.interessen,
-            adresse: this.adresse,
-        };
-    }
-
     updateInteressen(reisen: boolean, lesen: boolean, sport: boolean) {
         this.resetInteressen();
         if (reisen) {
-            this.addInteresse('REISEN');
-        }
-        if (sport) {
-            this.addInteresse('SPORT');
+            this.addInteressen('REISEN');
         }
         if (lesen) {
-            this.addInteresse('LESEN');
+            this.addInteressen('LESEN');
+        }
+        if (sport) {
+            this.addInteressen('SPORT');
         }
     }
 
+    /**
+     * Konvertierung des Buchobjektes in ein JSON-Objekt f&uuml;r den RESTful
+     * Web Service.
+     * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
+     */
+    toJSON(): KundeServer {
+        const geburtsdatum =
+            this.geburtsdatum === undefined
+                ? undefined
+                : this.geburtsdatum.toISOString();
+        console.log(`toJson(): geburtsdatum=${geburtsdatum}`);
+        return {
+            _id: this._id,
+            nachname: this.nachname,
+            kategorie: this.kategorie,
+            geschlecht: this.geschlecht,
+            familienstand: this.familienstand,
+            geburtsdatum,
+            newsletter: this.newsletter,
+            interessen: this.interessen,
+        };
+    }
+
     toString() {
-        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-        return JSON.stringify(this, undefined, 2);
+        // eslint-disable-next-line no-null/no-null,unicorn/no-null
+        return JSON.stringify(this, null, Kunde.SPACE);
     }
 
     private resetInteressen() {
         this.interessen = [];
     }
 
-    private addInteresse(interesse: string) {
+    private addInteressen(interesse: string) {
         if (this.interessen === undefined) {
             this.interessen = [];
         }

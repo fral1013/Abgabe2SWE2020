@@ -55,19 +55,18 @@ export class UpdateStammdatenComponent implements OnInit {
         }
 
         // rating, preis und rabatt koennen im Formular nicht geaendert werden
-        //nachname: string,
-        //familienstand: Familienstand,
-        //email: string,
-        //homepage: string,
-        //kategorie: number | undefined,
-        //newsletter: boolean,
+        // nachname: string,
+        // familienstand: Familienstand,
+        // email: string,
+        // homepage: string,
+        // kategorie: number | undefined,
+        // newsletter: boolean,
         this.kunde.updateStammdaten(
             this.form.value.nachname,
             this.form.value.email,
             this.form.value.kategorie,
             this.form.value.homepage,
             this.form.value.familienstand,
-            this.form.value.newsletter,
         );
         console.log('kunde=', this.kunde);
 
