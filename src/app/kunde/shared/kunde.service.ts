@@ -440,7 +440,7 @@ export class KundeService {
             geschlecht,
             interessen,
         } = suchkriterien;
-        const { javascript, typescript } = interessen;
+        const { lesen, reisen, sport } = interessen;
 
         if (nachname !== '') {
             httpParams = httpParams.set('nachname', nachname);
@@ -451,11 +451,14 @@ export class KundeService {
         if (familienstand !== '') {
             httpParams = httpParams.set('familienstand', familienstand);
         }
-        if (javascript) {
-            httpParams = httpParams.set('javascript', 'true');
+        if (lesen) {
+            httpParams = httpParams.set('lesen', 'true');
         }
-        if (typescript) {
-            httpParams = httpParams.set('typescript', 'true');
+        if (reisen) {
+            httpParams = httpParams.set('reisen', 'true');
+        }
+        if (sport) {
+            httpParams = httpParams.set('reisen', 'true');
         }
         return httpParams;
     }
@@ -481,6 +484,6 @@ export interface Suchkriterien {
     nachname: string;
     familienstand: Familienstand | '';
     geschlecht: Geschlecht | '';
-    interessen: { lesen: boolean; typescript: boolean };
+    interessen: { lesen: boolean; reisen: boolean; sport: boolean };
 }
 /* eslint-enable max-lines,no-null/no-null */
