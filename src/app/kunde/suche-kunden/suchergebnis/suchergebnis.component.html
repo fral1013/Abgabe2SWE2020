@@ -9,7 +9,7 @@
     >
       <div class="card-header">
         <i class="material-icons">folder_open</i>
-        <span class="ml-1 font-weight-bold">Gefundene Kunden</span>
+        <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
       </div>
       <div class="card-body">
         <table
@@ -32,32 +32,32 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let k of kunden; index as i" [@easeOut]="'in'">
-              <td (click)="onClick(k)">{{ i + 1 }}</td>
-              <td (click)="onClick(k)">{{ k._id }}</td>
-              <td (click)="onClick(k)">{{ k.nachname }}</td>
+            <tr *ngFor="let b of kunden; index as i" [@easeOut]="'in'">
+              <td (click)="onClick(b)">{{ i + 1 }}</td>
+              <td (click)="onClick(b)">{{ b._id }}</td>
+              <td (click)="onClick(b)">{{ b.titel }}</td>
               <td>
-                <span [ngSwitch]="k.familienstand">
-                  <span *ngSwitchCase="'VERHEIRATET'">Foo Verlag</span>
-                  <span *ngSwitchCase="'GESCHIEDEN'">Bar Verlag</span>
+                <span [ngSwitch]="b.verlag">
+                  <span *ngSwitchCase="'FOO_VERLAG'">Foo Verlag</span>
+                  <span *ngSwitchCase="'BAR_VERLAG'">Bar Verlag</span>
                   <span *ngSwitchDefault>unbekannt</span>
                 </span>
               </td>
-              <td (click)="onClick(k)">
-                <span *ngFor="let i of k.interessen">
-                  <span [ngSwitch]="i">
-                    <span *ngSwitchCase="'REISEN'"> JavaScript<br /> </span>
-                    <span *ngSwitchCase="'LESEN'"> TypeScript </span>
+              <td (click)="onClick(b)">
+                <span *ngFor="let sw of b.schlagwoerter">
+                  <span [ngSwitch]="sw">
+                    <span *ngSwitchCase="'JAVASCRIPT'"> JavaScript<br /> </span>
+                    <span *ngSwitchCase="'TYPESCRIPT'"> TypeScript </span>
                   </span>
                 </span>
               </td>
               <td>
-                <a [routerLink]="['..', k._id]" title="Details anzeigen">
+                <a [routerLink]="['..', b._id]" title="Details anzeigen">
                   <i class="material-icons">search</i>
                 </a>
               </td>
               <td *ngIf="isAdmin">
-                <span (click)="onRemove(k)" title="Entfernen">
+                <span (click)="onRemove(b)" title="Entfernen">
                   <i class="material-icons">delete</i>
                 </span>
               </td>
@@ -75,7 +75,7 @@
             </ng-template>
             <ng-template ngPluralCase="=1"> Es gibt Kunden </ng-template>
             <ng-template ngPluralCase="other">
-              Es gibt {{ kunden.length }} Kunden
+              Es gibt {{ kunden.length }} B&uuml;cher
             </ng-template>
           </span>
         </div>
