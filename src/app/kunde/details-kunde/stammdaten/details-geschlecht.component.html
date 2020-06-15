@@ -19,8 +19,9 @@
   <label class="col col-1"> Geschlecht </label>
   <div class="col col-11">
     <span [ngSwitch]="geschlecht">
-      <span *ngSwitchCase="'MAENNLICH'">Maennlich</span>
-      <span *ngSwitchCase="'WEIBLICH'">Weiblich</span>
+      <span *ngSwitchCase="'M'">Maennlich</span>
+      <span *ngSwitchCase="'W'">Weiblich</span>
+      <span *ngSwitchCase="'D'">Divers</span>
       <span *ngSwitchDefault>unbekannt</span>
     </span>
   </div>
