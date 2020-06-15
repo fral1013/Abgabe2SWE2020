@@ -1,0 +1,23 @@
+<div class="form-group row">
+  <label for="adresseInput" class="col col-2 form-control-label"
+    >Adresse *</label
+  >
+  <div class="col col-5" [formGroup]="form">
+    <input
+      id="plzInput"
+      placeholder="Postleitzahl"
+      class="form-control"
+      autofocus
+      formControlName="plz"
+    />
+  </div>
+  <div class="col col-5" [formGroup]="form">
+    <input
+      id="ortInput"
+      placeholder="Ort"
+      class="form-control"
+      autofocus
+      formControlName="ort"
+    />
+  </div>
+</div>

@@ -39,7 +39,7 @@ export enum Familienstand {
     LEDIG = 'L',
 }
 
-export class Adresse {
+export class MyAdresse {
     plz?: string;
 
     ort?: string;
@@ -75,8 +75,11 @@ export interface KundeShared {
     familienstand?: Familienstand | '';
     geschlecht: Geschlecht;
     geburtsdatum?: string;
+    plz?: string;
+    ort?: string;
     newsletter?: boolean;
     version?: number;
+    adresse?: MyAdresse;
 }
 
 interface Link {
@@ -136,9 +139,11 @@ export class Kunde {
                   );
     /* eslint-enable @typescript-eslint/no-invalid-this */
 
-    geburtsdatum: Date | undefined;
+    geburtsdatum: Date;
 
     interessen: Array<string>;
+
+    adresse: MyAdresse;
 
     // wird aufgerufen von fromServer() oder von fromForm()
     // eslint-disable-next-line max-params
@@ -153,11 +158,14 @@ export class Kunde {
         public newsletter: boolean | undefined,
         interessen: Array<string> | undefined,
         public version: number | undefined,
+        adresse: MyAdresse | undefined,
     ) {
         // TODO Parsing, ob der Datum-String valide ist
         this.geburtsdatum =
             geburtsdatum === undefined ? new Date() : new Date(geburtsdatum);
         this.interessen = interessen === undefined ? [] : interessen;
+        const mya: MyAdresse = { plz: '00000', ort: 'Aachen' };
+        this.adresse = adresse === undefined ? mya : adresse;
         console.log('Kunde(): this=', this);
     }
 
@@ -198,6 +206,7 @@ export class Kunde {
             kundeServer.newsletter,
             kundeServer.interessen,
             version,
+            kundeServer.adresse,
         );
         console.log('Kunde.fromServer(): kunde=', kunde);
         return kunde;
@@ -232,7 +241,13 @@ export class Kunde {
             kundeForm.newsletter,
             interessen,
             kundeForm.version,
+            kundeForm.adresse,
         );
+        const myAdr: MyAdresse = {
+            plz: kundeForm.plz,
+            ort: kundeForm.ort,
+        };
+        kunde.adresse = myAdr;
         console.log('Kunde.fromForm(): kunde=', kunde);
         return kunde;
     }
@@ -381,6 +396,7 @@ export class Kunde {
             geburtsdatum,
             newsletter: this.newsletter,
             interessen: this.interessen,
+            adresse: this.adresse,
         };
     }
 
