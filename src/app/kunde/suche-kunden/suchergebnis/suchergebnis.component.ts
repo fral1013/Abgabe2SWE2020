@@ -95,7 +95,7 @@ export class SuchergebnisComponent implements OnChanges, OnInit {
         }
 
         if (this.kunden.length > 0) {
-            this.kunden = this.kunden.filter((b: Kunde) => b._id !== kunde._id);
+            this.kunden = this.kunden.filter((k: Kunde) => k._id !== kunde._id);
         }
     }
 
