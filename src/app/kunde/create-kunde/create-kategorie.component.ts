@@ -20,7 +20,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-rating&gt;, um das Erfassungsformular
+ * Komponente mit dem Tag &lt;hs-create-kategorie&gt;, um das Erfassungsformular
  * f&uuml;r ein neuen Kunden zu realisieren.
  */
 @Component({
@@ -36,6 +36,6 @@ export class CreateKategorieComponent implements OnInit {
     ngOnInit() {
         console.log('CreateKategorieComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('rating', this.kategorie);
+        this.form.addControl('kategorie', this.kategorie);
     }
 }

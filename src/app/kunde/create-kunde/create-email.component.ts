@@ -15,26 +15,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import type { OnInit } from '@angular/core';
 
 /**
- * Komponente mit dem Tag &lt;hs-create-familienstand
+ * Komponente mit dem Tag &lt;hs-create-titel&gt;, um das Erfassungsformular
+ * f&uuml;r einen neuen Kunden zu realisieren.
  */
 @Component({
-    selector: 'hs-create-familienstand',
-    templateUrl: './create-familienstand.component.html',
+    // moduleId: module.id,
+    selector: 'hs-create-email',
+    templateUrl: './create-email.component.html',
 })
-export class CreateFamilienstandComponent implements OnInit {
+export class CreateEmailComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly familienstand = new FormControl(undefined, Validators.required);
+    // Keine Vorbelegung bzw. der leere String, da es Placeholder gibt
+    // Varianten fuer Validierung:
+    //    serverseitig mittels Request/Response
+    //    clientseitig bei den Ereignissen keyup, change, blur, ...
+    // Ein Endbenutzer bewirkt staendig einen neuen Fehlerstatus
+    readonly email = new FormControl(undefined, [
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+'),
+    ]);
+    // readonly titelGroup = new FormGroup({ titel: this.titel })
 
     ngOnInit() {
-        console.log('CreateFamilienstandComponent.ngOnInit');
+        console.log('CreateEmailComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('familienstand', this.familienstand);
+        this.form.addControl('email', this.email);
     }
 }
