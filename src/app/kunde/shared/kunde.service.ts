@@ -120,13 +120,19 @@ export class KundeService {
         // https://xgrommx.github.io/rx-book/content/observable/observable_instance_methods/subscribe.html
         // https://github.com/Reactive-Extensions/RxJS/blob/master/doc/api/core/operators/subscribe.md
 
-        let kunden;
+        const kunden: Array<Kunde> = [];
         try {
-            const kundenServer = await this.httpClient
-                .get<Array<KundeServer>>(uri, { params })
+            const response = await this.httpClient
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .get<any>(uri, { params })
                 .toPromise();
-            kunden = kundenServer.map(kunde => Kunde.fromServer(kunde));
+
+            const kundeList = response._embedded.kundeList as Array<
+                KundeServer
+            >;
+            kundeList.forEach(kunde => kunden.push(Kunde.fromServer(kunde)));
         } catch (err) {
+            console.log(err.message);
             throw this.buildFindError(err);
         }
 
