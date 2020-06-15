@@ -143,7 +143,7 @@ export class Kunde {
     ) {
         // TODO Parsing, ob der Datum-String valide ist
         this.geburtsdatum =
-            geburtsdatum === undefined ? new Date() : new Date(geburtsdatum);
+            geburtsdatum === undefined ? undefined : new Date(geburtsdatum);
         this.interessen = interessen === undefined ? [] : interessen;
         console.log('Kunde(): this=', this);
     }
