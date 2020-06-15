@@ -9,7 +9,7 @@
     >
       <div class="card-header">
         <i class="material-icons">folder_open</i>
-        <span class="ml-1 font-weight-bold">Gefundene B&uuml;cher</span>
+        <span class="ml-1 font-weight-bold">Gefundene Kunden</span>
       </div>
       <div class="card-body">
         <table
@@ -39,7 +39,7 @@
               <td>
                 <span [ngSwitch]="b.familienstand">
                   <span *ngSwitchCase="'L'">Ledig</span>
-                  <span *ngSwitchCase="'V'">Verheiratet</span>
+                  <span *ngSwitchCase="'VH'">Verheiratet</span>
                   <span *ngSwitchCase="'G'">Geschieden</span>
                   <span *ngSwitchCase="'VW'">Verwitwet</span>
                   <span *ngSwitchDefault>unbekannt</span>
@@ -48,9 +48,9 @@
               <td (click)="onClick(b)">
                 <span *ngFor="let sw of b.interessen">
                   <span [ngSwitch]="sw">
-                    <span *ngSwitchCase="'LESEN'"> Lesen<br /> </span>
-                    <span *ngSwitchCase="'REISEN'"> Reisen </span>
-                    <span *ngSwitchCase="'SPORT'"> Sport </span>
+                    <span *ngSwitchCase="'L'"> Lesen<br /> </span>
+                    <span *ngSwitchCase="'R'"> Reisen </span>
+                    <span *ngSwitchCase="'S'"> Sport </span>
                   </span>
                 </span>
               </td>
@@ -78,7 +78,7 @@
             </ng-template>
             <ng-template ngPluralCase="=1"> Es gibt Kunden </ng-template>
             <ng-template ngPluralCase="other">
-              Es gibt {{ kunden.length }} B&uuml;cher
+              Es gibt {{ kunden.length }} Kunden
             </ng-template>
           </span>
         </div>

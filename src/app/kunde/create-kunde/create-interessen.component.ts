@@ -31,17 +31,17 @@ export class CreateInteressenComponent implements OnInit {
     @Input()
     readonly form!: FormGroup;
 
-    readonly lesen = new FormControl(false);
-
     readonly reisen = new FormControl(false);
+
+    readonly lesen = new FormControl(false);
 
     readonly sport = new FormControl(false);
 
     ngOnInit() {
         console.log('CreateInteressenComponent.ngOnInit');
         // siehe formControlName innerhalb @Component({templateUrl: ...})
-        this.form.addControl('lesen', this.lesen);
         this.form.addControl('reisen', this.reisen);
+        this.form.addControl('lesen', this.lesen);
         this.form.addControl('sport', this.sport);
     }
 }
