@@ -26,6 +26,7 @@ import { CreateKategorieModule } from './create-kategorie.module';
 import { CreateKundeComponent } from './create-kunde.component';
 import { CreateNachnameModule } from './create-nachname.module';
 import { CreateNewsletterModule } from './create-newsletter.module';
+import { CreateUserModule } from './create-user.module';
 import { ErrorMessageModule } from '../../shared/error-message.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -51,6 +52,7 @@ import { Title } from '@angular/platform-browser';
         CreateNachnameModule,
         CreateAdresseModule,
         CreateEmailModule,
+        CreateUserModule,
         CreateFamilienstandModule,
         ErrorMessageModule,
     ],

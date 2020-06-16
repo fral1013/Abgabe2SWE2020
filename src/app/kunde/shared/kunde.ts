@@ -39,6 +39,11 @@ export enum Familienstand {
     LEDIG = 'L',
 }
 
+export class MyUser {
+    username: string;
+
+    password: string | undefined;
+}
 export class MyAdresse {
     plz?: string;
 
@@ -80,6 +85,8 @@ export interface KundeShared {
     newsletter?: boolean;
     version?: number;
     adresse?: MyAdresse;
+    username: string;
+    passwort?: string;
 }
 
 interface Link {
@@ -98,6 +105,7 @@ interface Link {
 export interface KundeServer extends KundeShared {
     kategorie?: number;
     interessen?: Array<string>;
+    user?: MyUser;
     _links?: {
         self: Link;
         list?: Link;
@@ -145,6 +153,8 @@ export class Kunde {
 
     adresse: MyAdresse;
 
+    user: MyUser;
+
     // wird aufgerufen von fromServer() oder von fromForm()
     // eslint-disable-next-line max-params
     private constructor(
@@ -156,6 +166,7 @@ export class Kunde {
         public familienstand: Familienstand | undefined | '',
         public geburtsdatum: string | undefined,
         public newsletter: boolean | undefined,
+        public username: string,
         interessen: Array<string> | undefined,
         public version: number | undefined,
         adresse: MyAdresse | undefined,
@@ -204,6 +215,7 @@ export class Kunde {
             kundeServer.familienstand,
             kundeServer.geburtsdatum,
             kundeServer.newsletter,
+            kundeServer.username,
             kundeServer.interessen,
             version,
             kundeServer.adresse,
@@ -221,13 +233,13 @@ export class Kunde {
         console.log('Kunde.fromForm(): kundeForm=', kundeForm);
         const interessen: Array<string> = [];
         if (kundeForm.reisen === true) {
-            interessen.push('REISEN');
+            interessen.push('R');
         }
         if (kundeForm.lesen === true) {
-            interessen.push('LESEN');
+            interessen.push('L');
         }
         if (kundeForm.sport === true) {
-            interessen.push('SPORT');
+            interessen.push('S');
         }
 
         const kunde = new Kunde(
@@ -239,10 +251,16 @@ export class Kunde {
             kundeForm.familienstand,
             kundeForm.geburtsdatum,
             kundeForm.newsletter,
+            kundeForm.username,
             interessen,
             kundeForm.version,
             kundeForm.adresse,
         );
+        const myUser: MyUser = {
+            username: kundeForm.username,
+            password: kundeForm.passwort,
+        };
+        kunde.user = myUser;
         const myAdr: MyAdresse = {
             plz: kundeForm.plz,
             ort: kundeForm.ort,
@@ -397,6 +415,8 @@ export class Kunde {
             familienstand: this.familienstand,
             geburtsdatum: this.geburtsdatum,
             newsletter: this.newsletter,
+            username: this.username,
+            user: this.user,
             interessen: this.interessen,
             adresse: this.adresse,
         };

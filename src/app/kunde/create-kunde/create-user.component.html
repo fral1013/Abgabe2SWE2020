@@ -1,0 +1,22 @@
+<div class="form-group row">
+  <label for="userInput" class="col col-2 form-control-label">User *</label>
+  <div class="col col-5" [formGroup]="form">
+    <input
+      id="usernameInput"
+      placeholder="Username"
+      class="form-control"
+      autofocus
+      formControlName="username"
+    />
+  </div>
+  <div class="col col-5" [formGroup]="form">
+    <input
+      id="passwortInput"
+      placeholder="Passwort"
+      class="form-control"
+      type="password"
+      autofocus
+      formControlName="passwort"
+    />
+  </div>
+</div>
