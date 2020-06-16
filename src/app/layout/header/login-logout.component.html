@@ -48,14 +48,14 @@
     [(ngModel)]="password"
     name="password"
   />
-  <button type="submit" class="btn btn-primary btn-sm ml-3" tabindex="3">
+  <button type="submit" class="btn btn-danger btn-sm ml-3" tabindex="3">
     Login
   </button>
 </form>
 
 <ng-template #loggedIn>
-  <button type="submit" class="btn btn-primary" (click)="onLogout()">
+  <button type="submit" class="btn btn-danger" (click)="onLogout()">
+    <i class="material-icons md-24">exit_to_app</i>
     <span class="mr-1">Logout</span>
-    <i class="material-icons md-48">chevron_right</i>
   </button>
 </ng-template>

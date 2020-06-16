@@ -15,12 +15,9 @@
 
 @import "../../sass/colors";
 
-$gradient: url("/assets/img/gradientBlueSky.png");
-
 // Vorsicht bei CSS-Selektoren: Namespaces, um Kollisionen zu vermeiden
 .hs-nav {
   background-color: $background-color;
-  background-image: $gradient;
   background-repeat: repeat-x;
   background-position: left top;
   // display: block;
