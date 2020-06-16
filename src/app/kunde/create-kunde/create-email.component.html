@@ -30,11 +30,12 @@
     />
 
     <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+      <i class="material-icons">error</i>
       <span class="ml-1" *ngIf="email.errors && email.errors.required">
-        Ein Email-Adresse muss eingegeben werden.
+        Eine Email-Adresse muss eingegeben werden.
       </span>
       <span class="ml-1" *ngIf="email.errors && email.errors.pattern">
-        Eine Email-Adresse muss valide sein.
+        Die Email-Adresse muss valide sein.
       </span>
     </div>
   </div>
