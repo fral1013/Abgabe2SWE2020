@@ -27,7 +27,7 @@ import type { OnInit } from '@angular/core';
 })
 export class DetailsGeburtsdatumComponent implements OnInit {
     @Input()
-    readonly formatted!: string;
+    readonly formatted!: string | undefined;
 
     ngOnInit() {
         console.log(
