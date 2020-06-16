@@ -139,7 +139,7 @@ export class Kunde {
                   );
     /* eslint-enable @typescript-eslint/no-invalid-this */
 
-    geburtsdatum: Date;
+    // geburtsdatum: string;
 
     interessen: Array<string>;
 
@@ -154,15 +154,15 @@ export class Kunde {
         public kategorie: number | undefined,
         public geschlecht: Geschlecht,
         public familienstand: Familienstand | undefined | '',
-        geburtsdatum: string | undefined,
+        public geburtsdatum: string | undefined,
         public newsletter: boolean | undefined,
         interessen: Array<string> | undefined,
         public version: number | undefined,
         adresse: MyAdresse | undefined,
     ) {
         // TODO Parsing, ob der Datum-String valide ist
-        this.geburtsdatum =
-            geburtsdatum === undefined ? new Date() : new Date(geburtsdatum);
+        // this.geburtsdatum =
+        //    geburtsdatum === undefined ? new Date() : new Date(geburtsdatum);
         this.interessen = interessen === undefined ? [] : interessen;
         const mya: MyAdresse = { plz: '00000', ort: 'Aachen' };
         this.adresse = adresse === undefined ? mya : adresse;
@@ -254,7 +254,8 @@ export class Kunde {
 
     // Property in TypeScript wie in C#
     // https://www.typescriptlang.org/docs/handbook/classes.html#accessors
-    get geburtsdatumFormatted() {
+    /**
+     * get geburtsdatumFormatted() {
         // z.B. 7. Mai 2020
         const formatter = new Intl.DateTimeFormat('de', {
             year: 'numeric',
@@ -265,6 +266,7 @@ export class Kunde {
             ? ''
             : formatter.format(this.geburtsdatum);
     }
+    */
 
     /**
      * Abfrage, ob im Kundennachnamen der angegebene Teilstring enthalten ist. Dabei
@@ -319,7 +321,7 @@ export class Kunde {
         geschlecht: Geschlecht,
         familienstand: Familienstand | undefined | '',
         kategorie: number | undefined,
-        geburtsdatum: Date | undefined,
+        // geburtsdatum: Date | undefined,
     ) {
         this.nachname = nachname;
         this.geschlecht = geschlecht;
@@ -329,8 +331,8 @@ export class Kunde {
             kategorie === undefined
                 ? new Array(MAX_KATEGORIE - MIN_KATEGORIE).fill(false)
                 : new Array(kategorie - MIN_KATEGORIE).fill(true);
-        this.geburtsdatum =
-            geburtsdatum === undefined ? new Date() : geburtsdatum;
+        // this.geburtsdatum =
+        //     geburtsdatum === undefined ? new Date() : geburtsdatum;
     }
 
     /**
@@ -381,11 +383,11 @@ export class Kunde {
      * @return Das JSON-Objekt f&uuml;r den RESTful Web Service
      */
     toJSON(): KundeServer {
-        const geburtsdatum =
-            this.geburtsdatum === undefined
-                ? undefined
-                : this.geburtsdatum.toISOString();
-        console.log(`toJson(): geburtsdatum=${geburtsdatum}`);
+        // const geburtsdatum =
+        //    this.geburtsdatum === undefined
+        //        ? undefined
+        //        : this.geburtsdatum.toISOString();
+        // console.log(`toJson(): geburtsdatum=${geburtsdatum}`);
         return {
             _id: this._id,
             nachname: this.nachname,
@@ -393,7 +395,7 @@ export class Kunde {
             kategorie: this.kategorie,
             geschlecht: this.geschlecht,
             familienstand: this.familienstand,
-            geburtsdatum,
+            geburtsdatum: this.geburtsdatum,
             newsletter: this.newsletter,
             interessen: this.interessen,
             adresse: this.adresse,

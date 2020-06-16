@@ -66,7 +66,7 @@ export class UpdateStammdatenComponent implements OnInit {
             this.form.value.email,
             this.form.value.kategorie,
             this.form.value.homepage,
-            this.form.value.familienstand,
+            // this.form.value.familienstand,
         );
         console.log('kunde=', this.kunde);
 
