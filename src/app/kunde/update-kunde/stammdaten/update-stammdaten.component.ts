@@ -63,9 +63,9 @@ export class UpdateStammdatenComponent implements OnInit {
         // newsletter: boolean,
         this.kunde.updateStammdaten(
             this.form.value.nachname,
-            this.form.value.email,
+            this.form.value.geschlecht,
+            this.form.value.familienstand,
             this.form.value.kategorie,
-            this.form.value.homepage,
             // this.form.value.familienstand,
         );
         console.log('kunde=', this.kunde);
