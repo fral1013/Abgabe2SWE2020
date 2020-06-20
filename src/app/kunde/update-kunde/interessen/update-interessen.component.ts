@@ -23,14 +23,14 @@ import type { OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 /**
- * Komponente f&uuml;r das Tag <code>hs-schlagwoerter</code>
+ * Komponente f&uuml;r das Tag <code>hs-</code>
  */
 @Component({
     selector: 'hs-update-interessen',
     templateUrl: './update-interessen.component.html',
 })
 export class UpdateInteressenComponent implements OnInit {
-    // <hs-update-schlagwoerter [buch]="...">
+    // <hs-update-interessen [buch]="...">
     @Input()
     readonly kunde!: Kunde;
 
@@ -51,7 +51,7 @@ export class UpdateInteressenComponent implements OnInit {
 
     /**
      * Das Formular als Gruppe von Controls initialisieren und mit den
-     * Schlagwoertern des zu &auml;ndernden Kunden vorbelegen.
+     * Interessenn des zu &auml;ndernden Kunden vorbelegen.
      */
     ngOnInit() {
         console.log('kunde=', this.kunde);
@@ -73,7 +73,7 @@ export class UpdateInteressenComponent implements OnInit {
     }
 
     /**
-     * Die aktuellen Schlagwoerter f&uuml;r das angezeigte Kunde-Objekt
+     * Die aktuellen Interessen f&uuml;r das angezeigte Kunde-Objekt
      * zur&uuml;ckschreiben.
      * @return false, um das durch den Button-Klick ausgel&ouml;ste Ereignis
      *         zu konsumieren.
