@@ -300,7 +300,7 @@ export class Kunde {
     }
 
     /**
-     * Die Bewertung ("kategorie") des Kunden um 1 erh&ouml;hen
+     * Die Kategorie ("kategorie") des Kunden um 1 erh&ouml;hen
      */
     rateUp() {
         if (this.kategorie !== undefined && this.kategorie < MAX_KATEGORIE) {
@@ -309,7 +309,7 @@ export class Kunde {
     }
 
     /**
-     * Die Bewertung ("kategorie") des Kunden um 1 erniedrigen
+     * Die Kategorie ("kategorie") des Kunden um 1 erniedrigen
      */
     rateDown() {
         if (this.kategorie !== undefined && this.kategorie > MIN_KATEGORIE) {
@@ -329,7 +329,7 @@ export class Kunde {
     /**
      * Aktualisierung der Stammdaten des Kunde-Objekts.
      * @param nachname Der neue Nachname
-     * @param kategorie Die neue Bewertung
+     * @param kategorie Die neue Kategorie
      * @param geschlecht Die neue Geschlecht (DRUCKAUSGABE oder KINDLE)
      * @param familienstand Der neue Familienstand
      */

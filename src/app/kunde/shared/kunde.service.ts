@@ -344,7 +344,7 @@ export class KundeService {
         console.log('KundeService.createBarChart(): labels:', labels);
 
         const data = kundenGueltig.map(k => k.kategorie);
-        const datasets: Array<ChartDataSets> = [{ label: 'Bewertung', data }];
+        const datasets: Array<ChartDataSets> = [{ label: 'Kategorie', data }];
 
         const config: ChartConfiguration = {
             type: 'bar',
@@ -371,7 +371,7 @@ export class KundeService {
         console.log('KundeService.createLinearChart(): labels:', labels);
 
         const data = kundenGueltig.map(k => k.kategorie);
-        const datasets: Array<ChartDataSets> = [{ label: 'Bewertung', data }];
+        const datasets: Array<ChartDataSets> = [{ label: 'Kategorie', data }];
 
         const config: ChartConfiguration = {
             type: 'line',

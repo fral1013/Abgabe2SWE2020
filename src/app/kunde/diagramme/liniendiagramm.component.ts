@@ -22,7 +22,7 @@ import { Title } from '@angular/platform-browser';
 
 /**
  * Komponente mit dem Tag &lt;hs-liniendiagramm&gt; zur Visualisierung
- * von Bewertungen durch ein Liniendiagramm.
+ * von Kategorien durch ein Liniendiagramm.
  */
 @Component({
     selector: 'hs-liniendiagramm',
