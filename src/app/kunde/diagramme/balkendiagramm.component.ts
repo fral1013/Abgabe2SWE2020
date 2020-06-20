@@ -22,7 +22,7 @@ import { Title } from '@angular/platform-browser';
 
 /**
  * Komponente mit dem Tag &lt;hs-balkendiagramm&gt; zur Visualisierung
- * von Bewertungen durch ein Balkendiagramm.
+ * von Kategorien durch ein Balkendiagramm.
  * https://blog.angular-university.io/angular-viewchild
  */
 @Component({

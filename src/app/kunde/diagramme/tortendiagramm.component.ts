@@ -22,7 +22,7 @@ import { Title } from '@angular/platform-browser';
 
 /**
  * Komponente mit dem Tag &lt;hs-tortendiagramm&gt; zur Visualisierung
- * von Bewertungen durch ein Tortendiagramm.
+ * von Kategorien durch ein Tortendiagramm.
  */
 @Component({
     selector: 'hs-tortendiagramm',
