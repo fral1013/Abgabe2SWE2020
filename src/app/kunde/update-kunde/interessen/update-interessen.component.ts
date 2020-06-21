@@ -73,7 +73,7 @@ export class UpdateInteressenComponent implements OnInit {
     }
 
     /**
-     * Die aktuellen Interessen f&uuml;r das angezeigte Kunde-Objekt
+     * Die aktuellen Interessen fuer das angezeigte Kunde-Objekt
      * zur&uuml;ckschreiben.
      * @return false, um das durch den Button-Klick ausgel&ouml;ste Ereignis
      *         zu konsumieren.
