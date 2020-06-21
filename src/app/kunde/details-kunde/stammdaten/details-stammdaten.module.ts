@@ -16,13 +16,13 @@
  */
 
 import { CommonModule } from '@angular/common';
+import { DetailsFamilienstandModule } from './details-familienstand.module';
+import { DetailsGeburtsdatumModule } from './details-geburtsdatum.module';
 import { DetailsGeschlechtModule } from './details-geschlecht.module';
 import { DetailsKategorieModule } from './details-kategorie.module';
-import { DetailsGeburtsdatumModule } from './details-geburtsdatum.module';
+import { DetailsNachnameModule } from './details-nachname.module';
 import { DetailsNewsletterModule } from './details-newsletter.module';
 import { DetailsStammdatenComponent } from './details-stammdaten.component';
-import { DetailsNachnameModule } from './details-nachname.module';
-import { DetailsFamilienstandModule } from './details-familienstand.module';
 import { NgModule } from '@angular/core';
 
 @NgModule({

@@ -13,6 +13,7 @@ export class SucheInteressenComponent {
     reisen = false;
 
     sport = false;
+
     constructor() {
         console.log('SucheInteressenComponent.constructor()');
     }

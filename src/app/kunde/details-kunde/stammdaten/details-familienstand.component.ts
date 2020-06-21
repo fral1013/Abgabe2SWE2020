@@ -16,8 +16,8 @@
  */
 
 import { Component, Input } from '@angular/core';
-import type { OnInit } from '@angular/core';
 import type { Familienstand } from '../../shared/kunde';
+import type { OnInit } from '@angular/core';
 
 /**
  * Komponente f&uuml;r das Tag <code>hs-details-familienstand</code>
